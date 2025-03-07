@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "a4GL6033s989wtEGYj4W+AxhhVRZFrMJbDcyJa56OgY=",
+  "Source": "Calia.Services.AuthAPI",
+  "BasePath": "_content/Calia.Services.AuthAPI",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

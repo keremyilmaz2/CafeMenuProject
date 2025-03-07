@@ -1,0 +1,80 @@
+﻿@model RegistrationRequestDTO
+
+<form method="post" class="needs-validation" novalidate>
+    <div class="container">
+        <div class="d-flex justify-content-center mt-4">
+            <div class="card" style="width: 100%; max-width: 500px;">
+                <!-- Responsive genişlik -->
+                <div class="card-header">
+                    <h6 class="card-title mb-0 text-center">Kayıt Ekranı</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <div class="row gy-3">
+                        <div class="col-12">
+                            <label class="control-label" style="font-size: 18px; color: #343a40;">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Email..." required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <div class="invalid-feedback">Lütfen geçerli bir email giriniz.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="control-label" style="font-size: 18px; color: #343a40;">İsim</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="İsim..." required />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <div class="invalid-feedback">Lütfen isminizi giriniz.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="control-label" style="font-size: 18px; color: #343a40;">Telefon Numarası</label>
+                            <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="Telefon Numarası..." required pattern="[0-9]{10}" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            <div class="invalid-feedback">Lütfen 10 haneli telefon numarası giriniz.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="control-label" style="font-size: 18px; color: #343a40;">Şifre</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Şifre..." required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <div class="invalid-feedback">Lütfen şifrenizi giriniz.</div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="control-label" style="font-size: 18px; color: #343a40;">Rol Listesi</label>
+                            <select asp-for="Role" class="form-select" asp-items="@ViewBag.RoleList" required>
+                                <option disabled selected>--Rol Seç--</option>
+                            </select>
+                            <div class="invalid-feedback">Lütfen bir rol seçiniz.</div>
+                        </div>
+
+                        <div class="col-12 text-center mt-3">
+                            <button type="submit" class="btn btn-success w-100">Kayıt Ol</button> <!-- Geniş buton -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Bootstrap istemci tarafı doğrulama desteği
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}

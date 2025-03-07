@@ -1,0 +1,20 @@
+27
+---------------------------------
+
+Odemesi Alinanlar:
+FILTRE KAHVE X0 --- 0
+Iptal Edilenler:
+RED EYE X1 --- 100
+Odemesi Alinanlar:
+Ikram Edilenler:
+ICE MOCHA X0 --- 0
+ICE FILTRE KAHVE X0 --- 0
+Nakit => 100
+Kredi Karti => 80
+Iskonto => 220
+Ikram => 0
+
+
+
+
+

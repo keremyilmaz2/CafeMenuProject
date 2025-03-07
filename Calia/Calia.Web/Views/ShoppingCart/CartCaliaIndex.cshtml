@@ -1,0 +1,265 @@
+﻿@using System.Globalization
+@using Calia.Web.Utility
+@model CartDto
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCalia.cshtml";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="~/css/media.css">
+
+<style>
+    .btn img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .container {
+        margin-top: 2rem !important;
+        padding: 1rem !important;
+    }
+
+    .card {
+        margin-top:150px;
+        margin-bottom: 2rem !important;
+        border-radius: 0.5rem !important;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .card-header {
+        background-color: #4b5d67 !important;
+        color: white !important;
+        padding: 1rem !important;
+        font-size: 1.2rem !important;
+        text-transform: uppercase !important;
+        font-weight: bold !important;
+    }
+
+    .product-name {
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+    }
+
+    .product-extras {
+        background-color: #f9f9f9 !important;
+        padding: 0.5rem !important;
+        border-radius: 0.3rem !important;
+        margin-bottom: 0.5rem !important;
+        color: #6c757d !important;
+        font-size: 0.9rem !important;
+    }
+
+    .btn {
+        padding: 0.6rem 1.5rem !important;
+        font-size: 0.9rem !important;
+        border-radius: 0.3rem !important;
+        transition: background-color 0.3s !important;
+    }
+
+        .btn:hover {
+            background-color: #654321 !important;
+            color: white !important;
+        }
+
+
+
+    .total-section {
+        font-weight: bold !important;
+        font-size: 1.3rem !important;
+    }
+
+    .total-price {
+        font-size: 1.8rem !important;
+        text-align: right !important;
+    }
+
+    .total-container {
+        margin-top: 50px; /* İstediğiniz mesafeye göre değeri artırabilirsiniz */
+    }
+
+    .row {
+        margin-bottom: 1rem !important;
+    }
+
+    .card-footer {
+        margin-top: 2rem !important;
+    }
+
+    .btn-group img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .justify-content-center {
+        justify-content: center !important;
+    }
+
+    .d-flex {
+        display: flex;
+        align-items: center;
+    }
+
+</style>
+
+@if (Model.CartHeader != null && Model.CartDetails?.Count() > 0)
+{
+    <form method="post">
+        <div class="container">
+            <div class="card shadow border-0 ">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <a asp-controller="Home" asp-action="Menu"
+                               class="btn btn-secondary btn-sm text-uppercase">
+                                Alışverişe Devam Et
+                            </a>
+                        </div>
+                    </div>
+
+                    @foreach (var item in Model.CartDetails)
+                    {
+                        <div class="row border-bottom pb-3 align-items-center">
+                            <div class="col-12 col-md-6">
+                                <h5 class="product-name">@item.Product.Name</h5>
+
+                                @if (item.ProductExtrasList.Count > 0)
+                                {
+                                    <ul class="product-extras">
+                                        @foreach (var extra in item.ProductExtrasList)
+                                        {
+                                            <li class="d-flex justify-content-between">
+                                                <span>@extra.ExtraName</span>
+                                                <span>@extra.Price.ToString("C", new CultureInfo("tr-TR"))</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+
+                            <div class="col-12 col-md-6 text-center row mt-2 mt-md-0">
+                                <div class="col-4">
+                                    <h6>@item.DetailPrice.ToString("C", new CultureInfo("tr-TR")) x @item.Count</h6>
+                                </div>
+                                <div class="col-4">
+                                    <div class="btn-group">
+                                        <a href="javascript:void(0);" class="btn plus-btn"
+                                           data-id="@item.CartDetailsId">
+                                            <img src="~/images/pluss.png" alt="Plus" />
+                                        </a>
+                                        <a href="javascript:void(0);" class="btn minus-btn"
+                                           data-id="@item.CartDetailsId">
+                                            <img src="~/images/minus528.png" alt="Minus" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <a href="javascript:void(0);" class="btn remove-btn"
+                                       data-id="@item.CartDetailsId">
+                                        <img src="~/images/trash.png" alt="Trash" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="card-footer bg-white border-0">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3 text-center">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <h5>Toplam</h5>
+                                    <h4>@Model.CartHeader.CartTotal.ToString("C", new CultureInfo("tr-TR"))</h4>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                @if (User.IsInRole(SD.RoleAdmin) || User.IsInRole(SD.RoleWaiter))
+                                {
+                                    <select asp-for="@Model.CartHeader.MasaNo" asp-items="@Model.Tables"
+                                            class="form-select border-0 shadow me-2" style="width: 120px;">
+                                        <option disabled selected>--Masa Seç--</option>
+                                    </select>
+                                }
+
+                                <div class="btn-group">
+                                    <button type="submit" asp-action="SiparisVer" class="btn btn-success btn-sm">
+                                        Sipariş Ver
+                                    </button>
+
+                                    @if (User.IsInRole(SD.RoleAdmin))
+                                    {
+                                        <button type="submit" asp-action="Ikram" class="btn btn-warning btn-sm">
+                                            İkram
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <div class="container text-center my-5">
+        <h4>Lütfen ürün ekleyiniz!</h4>
+        <a asp-controller="Home" asp-action="Menu" class="btn btn-primary mt-3">
+            Alışverişe Devam Et
+        </a>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $(".plus-btn").click(function () {
+            var cartDetailsId = $(this).data("id");
+            $.ajax({
+                url: '@Url.Action("Caliaplus", "ShoppingCart")',
+                type: 'GET',
+                data: { cartDetailsId: cartDetailsId },
+                success: function (result) {
+                    if (result.success) {
+                        location.reload();
+                    }
+                }
+            });
+        });
+
+        $(".minus-btn").click(function () {
+            var cartDetailsId = $(this).data("id");
+            $.ajax({
+                url: '@Url.Action("Caliaminus", "ShoppingCart")',
+                type: 'GET',
+                data: { cartDetailsId: cartDetailsId },
+                success: function (result) {
+                    if (result.success) {
+                        location.reload();
+                    }
+                }
+            });
+        });
+
+        $(".remove-btn").click(function () {
+            var cartDetailsId = $(this).data("id");
+            $.ajax({
+                url: '@Url.Action("CaliaRemoveCart", "ShoppingCart")',
+                type: 'GET',
+                data: { cartDetailsId: cartDetailsId },
+                success: function (result) {
+                    if (result.success) {
+                        location.reload();
+                    }
+                }
+            });
+        });
+    });
+</script>

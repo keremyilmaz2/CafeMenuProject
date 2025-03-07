@@ -1,0 +1,30 @@
+26
+---------------------------------
+Odemesi Alinanlar: 
+CHAI TEA LATTE X1 --- 105 
+YEŞIL ÇAY X1 --- 80 
+ADA ÇAYI X1 --- 80 
+HIBISCUS X1 --- 80 
+
+Ikram Edilenler: 
+CHAI TEA LATTE X1 --- 105 
+YEŞIL ÇAY X1 --- 80 
+ADA ÇAYI X1 --- 80 
+HIBISCUS X1 --- 80 
+
+Iptal Edilenler: 
+TÜRK KAHVESI X1 --- 70 
+SÜTLÜ ÇAY X1 --- 65 
+
+Nakit =>200
+
+Kredi Karti =>120
+
+Iskonto =>25
+
+Ikram =>295
+
+
+
+
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MaterialVM>
+
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCallia.cshtml";
+}
+
+
+<div class="col-12">
+    <div class="card h-100">
+        <div class="card-body p-3 p-md-4 p-lg-5">
+            <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-3">
+                <h6 class="mb-2 fw-bold text-md text-lg mb-0">Materyal Listesi</h6>
+                <a asp-controller="Material" asp-action="MaterialCreate" class="btn btn-warning w-100 w-md-auto mt-2 mt-md-0">
+                    <i class="bi bi-plus-circle"></i> Yeni Materyal Oluştur
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Materyal Ismi</th>
+                            <th scope="col" class="text-center">Kategoriler</th>
+                            <th scope="col" class="text-center">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in Model.OrderBy(u => u.MaterialName))
+                        {
+                            <tr>
+                                <td class="align-middle text-start">@obj.MaterialName</td>
+                                <td class="align-middle text-start">
+                                    @foreach (var category in obj.Categories)
+                                    {
+                                        <span>@category</span>
+
+                                        <br />
+                                    }
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group" role="group">
+                                        <a asp-controller="Material" asp-action="MaterialEdit" asp-route-name="@obj.MaterialName" class="btn btn-warning btn-sm mx-1">
+                                            <i class="bi bi-pencil-fill"></i> Düzenle
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

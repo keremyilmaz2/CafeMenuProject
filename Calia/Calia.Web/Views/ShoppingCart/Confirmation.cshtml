@@ -1,0 +1,50 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCalia.cshtml";
+}
+
+<!-- CSS Ayarları -->
+<style>
+    .custom-order-page {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+        .custom-order-page h1 {
+            font-size: 2rem;
+            margin-top: 40px; /* Başlığı daha aşağıya çekmek için üstten boşluk ekleyelim */
+            margin-bottom: 20px;
+        }
+
+        .custom-order-page p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .custom-order-page h4 {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .custom-order-page img {
+            max-width: 75%;
+            height: auto;
+        }
+</style>
+
+<!-- HTML -->
+<div class="custom-order-page text-center">
+
+    <h1 class="text-dark">Congratulations! You are one step closer to amazing food. </h1>
+    <p>We have received your order and will be ready in the shortest time during regular business hours!</p>
+
+    <img src="/images/thankyou.jpg" alt="Order Image" />
+</div>

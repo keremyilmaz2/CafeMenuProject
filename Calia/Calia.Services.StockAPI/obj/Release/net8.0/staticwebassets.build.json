@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "HPJ9zeTlIVYxXwBDr7C1FE52WKidZwKisCEFMerQvos=",
+  "Source": "Calia.Services.StockAPI",
+  "BasePath": "_content/Calia.Services.StockAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,213 @@
+﻿    @model GunSonuDto
+    @{
+        ViewData["Title"] = "Menu Page";
+        Layout = "~/Views/Shared/_LayoutCallia.cshtml";
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex flex-wrap align-items-center justify-content-end gap-2">
+
+                <a href="javascript:void(0)" class="btn btn-sm btn-primary-600 radius-8 d-inline-flex align-items-center gap-1" onclick="sendInvoiceEmail()">
+                    <iconify-icon icon="pepicons-pencil:paper-plane" class="text-xl"></iconify-icon>
+                    Send Invoice
+                </a>
+
+                <a href="javascript:void(0)" class="btn btn-sm btn-warning radius-8 d-inline-flex align-items-center gap-1" onclick="downloadInvoice()">
+                    <iconify-icon icon="solar:download-linear" class="text-xl"></iconify-icon>
+                    Download
+                </a>
+               
+                <button type="button" class="btn btn-sm btn-danger radius-8 d-inline-flex align-items-center gap-1" onclick="printInvoice()">
+                    <iconify-icon icon="basil:printer-outline" class="text-xl"></iconify-icon>
+                    Print
+                </button>
+            </div>
+        </div>
+        <div class="card-body py-40">
+            <div class="row justify-content-center" id="invoice">
+                <div class="col-lg-8">
+                    <div class="shadow-4 border radius-8">
+                        <div class="p-20 d-flex flex-wrap justify-content-between gap-3 border-bottom">
+                            <div>
+                                <h3 class="text-xl">Invoice #3492</h3>
+                                <p class="mb-1 text-sm">Tarih: @Model.GununTarih</p>
+                                <p class="mb-0 text-sm">@Model.GununAdi günü</p>
+                            </div>
+                            <div>
+                                <img src="~/images/callia.jpeg" alt="image" class="mb-8">
+                                <p class="mb-1 text-sm"> Paşakent, CENTRAL APART,</p>
+                                <p class="mb-1 text-sm"> Şht. Hakan Palabıyık Cad. NO: 8/A, 10200</p>
+                                <p class="mb-1 text-sm"> Bandırma/Balıkesir</p>
+                                <p class="mb-0 text-sm">random@gmail.com, +90 505 091 77 09</p>
+                            </div>
+                        </div>
+                        <div class="py-28 px-20">
+                       
+                            <form method="post" asp-action="GunSonu">
+                                <div class="mt-24">
+                                    <div class="table-responsive">
+                                        <table class="table vertical-striped-table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="text-sm">Açıklama</th>
+                                                    <th scope="col" class="text-sm">Tutar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Satilan Urun Fiyati</td>
+                                                    <td id="SatilanUrunFiyati">@string.Format(new System.Globalization.CultureInfo("tr-TR"), "{0:C}", Model.SatilanUrunFiyati)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Toplam Siparis Sayisi</td>
+                                                    <td id="ToplamSiparisSayisi">@Model.ToplamSiparisSayisi</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Toplam Kazanç</td>
+                                                    <td id="toplamKazanc">@string.Format(new System.Globalization.CultureInfo("tr-TR"), "{0:C}", Model.ToplamKazanç)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Kredi Kartı</td>
+                                                    <td>
+                                                        <input type="number" id="krediKarti" asp-for="GunlukKrediKarti" class="form-control" onchange="updateTotal()" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nakit</td>
+                                                    <td>
+                                                        <input type="number" id="nakit" asp-for="GunlukNakit" class="form-control" onchange="updateTotal()" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>İskonto</td>
+                                                    <td>
+                                                        <input type="number" id="iskonto" asp-for="GunlukIskonto" class="form-control" onchange="updateTotal()" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Ikram</td>
+                                                    <td>
+                                                        <input type="number" id="iskonto" asp-for="GunlukIkram" class="form-control" onchange="updateTotal()" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gider</td>
+                                                    <td>
+                                                        <input type="number" id="gider" asp-for="GunlukGider" class="form-control" onchange="updateTotal()" />
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                            </form>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+        <script>
+
+
+            function updateTotal() {
+                // Kredi Kartı ve Nakit değerlerini al
+                var krediKarti = parseFloat(document.getElementById("krediKarti").value) || 0;
+                var nakit = parseFloat(document.getElementById("nakit").value) || 0;
+                var iskonto = parseFloat(document.getElementById("iskonto").value) || 0;
+
+                // Toplam kazancı hesapla (iskonto hariç)
+                var toplamKazanc = krediKarti + nakit;
+
+                // Toplam kazancı göster
+                document.getElementById("toplamKazanc").innerText = toplamKazanc.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' });
+            }
+
+
+            function printInvoice() {
+                var printContents = document.getElementById("invoice").innerHTML;
+                var originalContents = document.body.innerHTML;
+
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+            }
+
+        function downloadInvoice() {
+            var element = document.getElementById("invoice");
+
+            // HTML içeriğinden PDF oluşturma
+            html2pdf()
+                .from(element)
+                .save('gunsonu.pdf') // PDF'yi kullanıcıya indirin
+                .then(function () {
+                    console.log('PDF başarıyla kaydedildi.');
+
+                    // PDF'yi blob olarak almak için önce PDF'yi tekrar oluşturun
+                    return html2pdf().from(element).toPdf().get('pdf');
+                })
+                .then(function (pdf) {
+                    return pdf.output('blob'); // Blob olarak elde et
+                })
+                .then(function (blob) {
+                    console.log('Blob elde edildi.');
+
+                    // Sunucuya gönderim
+                    var formData = new FormData();
+                    formData.append('file', blob, 'gunsonu.pdf');
+
+                    fetch('/Home/SaveInvoicePdf', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        console.log('Sunucuya gönderim yapılıyor...');
+                        if (response.ok) {
+                            alert('Invoice saved successfully on server!');
+                        } else {
+                            alert('Failed to save invoice on server.');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to save invoice on server.');
+                    });
+                })
+                .catch(err => console.error('PDF oluşturma hatası:', err));
+        }
+
+
+
+
+            async function sendInvoiceEmail() {
+                var krediKarti = document.getElementById("krediKarti").value;
+                var nakit = document.getElementById("nakit").value;
+                var iskonto = document.getElementById("iskonto").value;
+
+                const response = await fetch('/Home/SendInvoiceEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        krediKarti: krediKarti,
+                        nakit: nakit,
+                        iskonto: iskonto,
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Invoice sent successfully!');
+                } else {
+                    alert('Failed to send invoice. Please try again.');
+                }
+            }
+        </script>
+    }

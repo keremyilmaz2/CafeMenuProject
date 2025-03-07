@@ -1,0 +1,46 @@
+﻿@model RaporVM
+
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCallia.cshtml";
+}
+
+
+<div class="col-xxl-12">
+    <div class="card h-100">
+        <div class="card-body p-24">
+            <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20">
+                <h6 class="mb-2 fw-bold text-lg mb-0">Malzemeler</h6>
+                <a asp-controller="Home" asp-action="AdminIndex" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                    Tümünü Gör
+                    <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table vertical-striped-table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Malzeme Adı</th>
+                            <th scope="col" class="text-center">Kalan Miktar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Malzemeler)
+                        {
+                            <tr>
+                                <td>
+                                    <h6 class="text-md mb-0 fw-normal">@item.MaterialName</h6>
+                                </td>
+                                <td class="text-center">
+                                    <span class="bg-success-focus text-success-main px-32 py-4 rounded-pill fw-medium text-sm">@item.MaterialAmount</span>
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

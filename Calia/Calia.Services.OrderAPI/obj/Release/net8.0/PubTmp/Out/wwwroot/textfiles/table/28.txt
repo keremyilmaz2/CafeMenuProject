@@ -1,0 +1,24 @@
+28
+---------------------------------
+Odemesi Alinanlar: 
+V60 X2 --- 220 
+
+Ikram Edilenler: 
+V60 X2 --- 220 
+
+Iptal Edilenler: 
+RED EYE X1 --- 100 
+FILTRE KAHVE X1 --- 90 
+
+Nakit =>220
+
+Kredi Karti =>0
+
+Iskonto =>0
+
+Ikram =>185
+
+
+
+
+

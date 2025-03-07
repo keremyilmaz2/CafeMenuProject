@@ -1,0 +1,59 @@
+﻿@model List<TableNoDto>
+
+<div class="col-xxl-12">
+    <div class="card h-100">
+        <div class="card-body p-24">
+            <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20">
+                <h6 class="mb-2 fw-bold text-lg mb-0">Masalar Listesi</h6>
+                <div class="col-6 text-end">
+                    <a asp-action="AddTable" class="btn btn-outline-primary">
+                        <i class="bi bi-plus-square"></i> Yeni Masa Oluştur
+                    </a>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table vertical-striped-table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Masa Numarası</th>
+                            <th scope="col" class="text-center">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var masa in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <h6 class="text-md mb-0 fw-normal">@masa.MasaNo</h6>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" onclick="confirmDelete(@masa.Id)" class="btn btn-danger" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(masaId) {
+        if (confirm("Masa silmek istediğinize emin misiniz?")) {
+            // Formu veya Ajax isteği ile masa silme işlemini gerçekleştirin
+            var form = document.createElement("form");
+            form.method = "post"; // POST yöntemi kullanıyoruz
+            form.action = "/Order/MasaDelete"; // İlgili kontrolör ve aksiyon adı
+            var hiddenField = document.createElement("input");
+            hiddenField.type = "hidden";
+            hiddenField.name = "masaId"; // Parametre adı
+            hiddenField.value = masaId; // Silinecek masa ID'si
+            form.appendChild(hiddenField);
+            document.body.appendChild(form); // Formu body'e ekle
+            form.submit(); // Formu gönder
+        }
+    }
+</script>

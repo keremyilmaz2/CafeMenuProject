@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Calia.Web.props" />
+</Project>

@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCalia.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/media.css">
+
+<style>
+    .info {
+        display: flex;
+        flex-direction: column; /* Yalnızca dikey düzen kullan */
+        padding: 20px;
+    }
+
+    .info_main {
+        margin-bottom: 20px; /* Altında boşluk bırak */
+    }
+
+    
+
+    .info_media img {
+        max-width: 100%; /* Görüntü boyutunu ayarla */
+        height: auto;
+    }
+
+    iframe {
+        width: 100%; /* Harita genişliğini tam olarak ayarla */
+        height: 400px; /* Sabit yükseklik ver */
+        border: 0; /* Kenarlığı kaldır */
+    }
+</style>
+
+<header class="page">
+    <div class="page_cover d-flex flex-column align-items-center justify-content-center">
+        <div class="page_cover-img"></div>
+        <h2 class="page_cover-title">İletişim</h2>
+    </div>
+    <div class="page_breadcrumbs">
+        <ul class="page_breadcrumbs-list d-flex flex-wrap justify-content-center h5">
+            <li><a class="link" href="index.html">Menu/</a></li>
+            <li>İletişim</li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="info section--nopb" style="margin-bottom: 80px;">
+        <div class="container d-flex flex-column">
+            <ul class="info_main d-flex flex-column">
+                <li class="info_main-item text--medium">
+                    <h4 class="title">Adres:</h4>
+                    <p>Paşakent MH. Şehit Hakan Palabiyik Cd. Central Apart No: 8/A</p>
+                </li>
+                <li class="info_main-item">
+                    <h4 class="title">Tel:</h4>
+                    <ul class="list d-flex flex-wrap text--medium">
+                        <li><a class="link" href="tel:+905462291435">+90 505 091 77 99</a></li>
+                    </ul>
+                </li>
+                <li class="info_main-item">
+                    <h4 class="title">ÇALIŞMA SAATLERİMİZ</h4>
+                    <ul class="list">
+                        <li><span class="text--bold">PAZARTESİ</span> 09:00 - 01:00</li>
+                        <li><span class="text--bold">PAZAR</span> 09:00 - 01:00</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="info_media">
+                <picture>
+                    <source srcset="@Url.Content("~/images/media.webp")" type="image/webp">
+                    <img src="@Url.Content("~/images/media.jpg")" alt="Contact Us" style="max-width: 100%; height: auto;">
+                </picture>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d639.2913066658864!2d27.945680591650092!3d40.3423663750505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b5d33f014d6fa1%3A0x8228f8c6398a2c72!2sCallia!5e0!3m2!1str!2str!4v1713834540626!5m2!1str!2str" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</main>

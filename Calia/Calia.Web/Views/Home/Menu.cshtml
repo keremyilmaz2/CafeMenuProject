@@ -1,0 +1,308 @@
+﻿@model List<CartVM>
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCalia.cshtml";
+}
+
+<style>
+    .form-check .form-check-input {
+        float: left;
+        margin-left: 0 !important;
+    }
+
+    .section_header-subtitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .toggle-icon {
+        float: right;
+        cursor: pointer;
+    }
+
+    .cizgi {
+        padding: 15px 0;
+        border-bottom: 1px solid #ccc;
+        font-size: 19px;
+    }
+
+    .section_header-subtitle {
+        font-weight: bold;
+        font-family: 'Raleway';
+    }
+
+    .section_header-title {
+        font-family: 'Raleway';
+    }
+
+    .submenu_list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: none;
+    }
+
+    .submenu_item {
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+        background-color: #f9f9f9;
+        font-size: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .price {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .show {
+        display: block;
+    }
+
+    .rotate {
+        transform: rotate(180deg);
+    }
+
+    /* Yeni stil eklemeleri */
+
+    .product-details {
+        background-color: #f1f1f1;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-check-input:checked {
+        background-color: #967c72 !important;
+        border-color: #967c72 !important;
+    }
+
+
+    .submenu_item {
+        border: none;
+        background-color: transparent;
+        padding: 8px 0;
+        font-size: 14px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .form-check-input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .form-check-label {
+        margin-left: 8px;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .input-group .form-control {
+        font-size: 12px;
+        max-width: 60px;
+    }
+
+    .input-group .input-group-text {
+        font-size: 12px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+        padding: 6px 16px;
+    }
+
+    .menu_tab-list_item {
+        padding-bottom: 20px;
+    }
+</style>
+
+<section class="menu section">
+    <div class="container">
+        <div class="section_header centered" style="margin-top: 20px;">
+            <span class="section_header-subtitle" data-aos="fade-down">Menü</span>
+            <h2 class="section_header-title" data-aos="fade-up" data-aos-delay="50">Menü Fiyat Listesi</h2>
+        </div>
+
+        @foreach (var categoryVM in Model.Select(vm => vm.categoryVMs.FirstOrDefault()).Distinct().OrderBy(c => c?.Category.DisplayOrder))
+        {
+            <div class="section_header-subtitle cizgi" data-aos="fade-down">
+                @categoryVM.Category.Name
+                <span class="toggle-icon">▼</span>
+            </div>
+            <ul class="menu_tab-list collapse">
+                @foreach (var cartVM in Model.Where(vm => vm.categoryVMs.Contains(categoryVM)))
+                {
+                    <li class="menu_tab-list_item">
+                        <div class="main h5">
+                            <a class="main_name product-toggle" href="javascript:void(0);">
+                                @cartVM.ShoppingCart.Product.Name
+                            </a>
+                            <span class="main_price">@cartVM.ShoppingCart.Product.Price TL <span class="toggle-icon">▼</span></span>
+                        </div>
+                        <div class="product-details submenu_list">
+                            <form method="post" action="@Url.Action("ProductDetails", "Home")" data-product-id="@cartVM.ShoppingCart.Product.ProductId">
+                                @for (var i = 0; i < cartVM.ShoppingCart.Product.ProductExtras.Count(); i++)
+                                {
+                                    var extra = cartVM.ShoppingCart.Product.ProductExtras.ElementAt(i);
+                                    var extraId = $"extraCheckBox_{cartVM.ShoppingCart.Product.ProductId}_{i}";
+                                    @if (extra.Price == null || extra.Price == 0 )
+                                    {
+                                        <div class="form-check submenu_item">
+                                            <input type="checkbox" name="ExtraIds[@i]" value="@extra.Id" class="form-check-input" id="@extraId" />
+                                            <label class="form-check-label" for="@extraId">@extra.ExtraName</label>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-check submenu_item">
+                                            <input type="checkbox" name="ExtraIds[@i]" value="@extra.Id" class="form-check-input" id="@extraId" />
+                                            <label class="form-check-label" for="@extraId">@extra.ExtraName - @extra.Price.ToString("c")</label>
+                                        </div>
+                                    }
+                                    
+                                }
+
+                                <div class="submenu_item">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" style="background-color: #967c72; color: white; border: none;" id="inputGroup-sizing-default">Count</span>
+                                        <select name="Count" class="form-select border-0 shadow" aria-label="Count selection" style="max-width: 60px;">
+                                            @for (var i = 1; i <= 15; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn py-1 text-uppercase fw-semibold" style="font-size: 0.85rem; padding: 0.5rem 1rem;">Sepete Ekle</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+
+    <script>
+        document.querySelectorAll('.form-check-input').forEach(function (checkbox) {
+            checkbox.addEventListener('click', function () {
+                console.log("Checkbox tıklandı: " + checkbox.checked); // Tıklandığında durumunu kontrol edin
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('form').forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault(); // Formun varsayılan submit davranışını durduruyoruz
+
+                    // Ürün ID'sini alalım
+                    const productId = form.getAttribute('data-product-id');
+
+                    // Seçili ekstraların durumu için IsExtraSelected listesini oluşturalım
+                    const isExtraSelected = [];
+                    form.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
+                        isExtraSelected.push(checkbox.checked); // Seçilmişse true, seçilmemişse false ekler
+                    });
+
+                    // Adet bilgisini alalım
+                    const countSelect = form.querySelector('select[name="Count"]');
+                    const count = countSelect ? countSelect.value : 1; // Seçim alanı varsa değerini al, yoksa varsayılan olarak 1 kullan
+
+                    // Verileri JSON formatında hazırlayalım
+                    const cartData = {
+                        ShoppingCart: {
+                            ProductId: productId,
+                            Count: count
+                        },
+                        IsExtraSelected: isExtraSelected
+                    };
+
+                    // Butonu devre dışı bırak
+                    const button = form.querySelector('button[type="submit"]');
+                    button.disabled = true; // Butonu devre dışı bırak
+                    button.textContent = "Ekleniyor..."; // Butonun metnini değiştir
+
+                    // AJAX ile POST isteği gönderelim
+                    fetch('@Url.Action("ProductDetails", "Home")', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(cartData) // Verileri JSON olarak gönderiyoruz
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            // İsteğin sonucunda yapılacak işlemler
+                            if (data.success) {
+                                toastr.success(data.message); // Başarılı olduğunda toastr ile mesaj göster
+
+                                // Formu sıfırla ve butonu yeniden aktif hale getir
+                                form.reset(); // Formu sıfırla
+                                button.textContent = "Sepete Ekle"; // Butonun metnini eski haline getir
+                            } else {
+                                toastr.error(data.message); // Hata olduğunda toastr ile hata mesajını göster
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            toastr.error("Bir hata oluştu."); // Genel hata mesajı göster
+                        })
+                        .finally(() => {
+                            // Her durumda butonu tekrar aktif et
+                            button.disabled = false; // Butonu tekrar aktif et
+                            button.textContent = "Sepete Ekle";
+                        });
+                });
+            });
+        });
+
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleIcons = document.querySelectorAll('.toggle-icon');
+            const menuToggles = document.querySelectorAll('.section_header-subtitle');
+
+            function toggleMenu(event) {
+                const target = event.currentTarget;
+                const menuList = target.nextElementSibling;
+                const icon = target.querySelector('.toggle-icon');
+
+                menuList.classList.toggle('show');
+
+                if (menuList.classList.contains('show')) {
+                    icon.textContent = '▲'; // Açık durumdayken ok yukarıya doğru gösterilir
+                } else {
+                    icon.textContent = '▼'; // Kapalı durumdayken ok aşağıya doğru gösterilir
+                }
+            }
+
+            menuToggles.forEach(toggle => {
+                toggle.addEventListener('click', toggleMenu);
+            });
+        });
+
+        // Toggle product details
+        document.querySelectorAll(".product-toggle").forEach(function (productToggle) {
+            productToggle.addEventListener("click", function () {
+                var productDetails = this.closest(".menu_tab-list_item").querySelector(".product-details");
+                productDetails.classList.toggle("show");
+            });
+        });
+            });
+    </script>
+
+}

@@ -1,0 +1,28 @@
+11
+---------------------------------
+Odemesi Alinanlar: 
+ESPRESSO X0 --- 0 
+ICE WHITE MOCHA X0 --- 0 
+DOUBLE TÜRK KAHVESI X0 --- 0 
+Iptal Edilenler: 
+Odemesi Alinanlar: 
+Ikram Edilenler: 
+Iptal Edilenler: 
+Odemesi Alinanlar: 
+Ikram Edilenler: 
+Iptal Edilenler: 
+KIŞ ÇAYI X3 --- 240 
+CHEMEX X4 --- 440 
+TÜRK KAHVESI X4 --- 280 
+Nakit =>400
+
+Kredi Karti =>200
+
+Iskonto =>360
+
+Ikram =>100
+
+
+
+
+

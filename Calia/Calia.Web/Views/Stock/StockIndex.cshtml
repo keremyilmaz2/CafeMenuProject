@@ -1,0 +1,61 @@
+﻿@model List<StockMaterialDto>
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCallia.cshtml";
+}
+
+
+<div class="col-xxl-12">
+    <div class="card h-100">
+        <div class="card-body p-24">
+            <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20">
+                <h6 class="mb-2 fw-bold text-lg mb-0">Stok Listesi</h6>
+                <a asp-controller="Home" asp-action="AdminIndex" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                    Geri Dön
+                    <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table vertical-striped-table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Malzeme</th>
+                            <th scope="col" class="text-center">Miktar</th>
+                            <th scope="col" class="text-center">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            @foreach (var obj in Model.OrderBy(u => u.MaterialAmount))
+                            {
+                                <tr>
+                                    <td>
+                                        <h6 class="text-md mb-0 fw-normal">@obj.MaterialName</h6>
+                                        
+                                    </td>
+                                    <td class="text-center">@obj.MaterialAmount</td>
+                                    <td class="text-center">
+                                        <a asp-controller="Stock" asp-action="StockEdit" asp-route-stockId="@obj.MaterialId" class="btn btn-primary mx-2 bg-warning-800">
+                                            <i class="bi bi-pencil-square"></i> Düzenle
+                                        </a>
+                                    </td>
+                                   
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3" class="text-center">Stok bilgisi bulunamadı.</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

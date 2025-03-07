@@ -1,0 +1,109 @@
+﻿@model TableDetailsDto
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="container">
+        <div class="row gy-4">
+            <!-- Masa Bilgileri Kartı -->
+            <div class="col-xxl-6 col-lg-6">
+                <div class="card h-100">
+                    <div class="card-body p-24">
+                        <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20">
+                            <h6 class="mb-2 fw-bold text-lg mb-0">Masa Bilgileri</h6>
+                            <a asp-action="AdminIndex"
+                               class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                                Panele Geri Dön
+                                <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                            </a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table vertical-striped-table mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th>Masa Numarası:</th>
+                                        <td>@Model.tableNo.MasaNo</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Sipariş Saati:</th>
+                                        <td>@Model.OpenTime?.ToString("HH:mm")</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kapanış Saati:</th>
+                                        <td>@Model.CloseTime?.ToString("HH:mm")</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nakit:</th>
+                                        <td>@Model.Nakit</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kredi Kartı:</th>
+                                        <td>@Model.KrediKarti</td>
+                                    </tr>
+                                    <tr>
+                                        <th>İskonto:</th>
+                                        <td>@Model.Ikram</td>
+                                    </tr>
+                                    <tr>
+                                        <th>İkram:</th>
+                                        <td>@Model.Iskonto</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ödeme Durumu:</th>
+                                        <td>@Model.PaymentStatus</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sipariş Detayları Kartı -->
+            <div class="col-xxl-6 col-lg-6">
+                <div class="card h-100">
+                    <div class="card-body p-24">
+                        <h6 class="mb-2 fw-bold text-lg">Sipariş Detayları</h6>
+                        <div class="list-group">
+                            @foreach (var orderHeader in Model.OrderHeaders)
+                            {
+                                foreach (var detail in orderHeader.OrderDetails)
+                                {
+                                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="mb-1">@detail.Product.Name</h6>
+                                            <small class="text-muted">
+                                                @foreach (var extra in detail.ProductExtrasList)
+                                                {
+                                                    <span>@extra.ExtraName</span>
+
+                                                    <br />
+                                                }
+                                            </small>
+                                            <small class="d-block text-success">
+                                                Ödemesi Alınan: @detail.OdemesiAlinmisCount ×
+                                                @detail.Price.ToString("C")
+                                            </small>
+                                            <small class="d-block text-danger">
+                                                Ödemesi Alınmayan: @detail.Count ×
+                                                @detail.Price.ToString("C")
+                                            </small>
+                                        </div>
+                                        <span class="badge bg-success">@detail.Price.ToString("C")</span>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="mt-3 d-flex justify-content-between">
+                            <h5 class="text-dark">Masa Fiyatı</h5>
+                            <h5 class="text-success">@string.Format(new System.Globalization.CultureInfo("tr-TR"), "{0:C}", Model.TotalTable)</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

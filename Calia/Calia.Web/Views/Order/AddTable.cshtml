@@ -1,0 +1,40 @@
+﻿@model TableNoDto
+
+@{
+    ViewData["Title"] = "Masa Ekle";
+}
+
+<!-- Form yapısı -->
+<div class="container">
+    <div class="d-flex justify-content-center mt-4">
+        <div class="card" style="width: 100%; max-width: 600px;">
+            <!-- Max width ile büyük ekranları optimize ettik -->
+            <div class="card-header">
+                <h6 class="card-title mb-0 text-center">Gider Bilgileri</h6>
+            </div>
+            <div class="card-body">
+                <form asp-action="AddTable" method="post" class="needs-validation" novalidate>
+                    <div class="row gy-3">
+
+                        <div class="col-12">
+                            <label asp-for="MasaNo" class="control-label" style="font-size: 18px; color: #343a40;">Masa İsmi</label>
+                            <input asp-for="MasaNo" class="form-control" required />
+                            <div class="invalid-feedback">Lütfen bir masa ismi giriniz.</div>
+                        </div>
+
+
+
+                        <div class="col-12 text-center mt-3">
+                            <button type="submit" class="btn btn-success w-100">Kaydet</button> <!-- Düğme genişliği ekranda esnek olacak şekilde -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}

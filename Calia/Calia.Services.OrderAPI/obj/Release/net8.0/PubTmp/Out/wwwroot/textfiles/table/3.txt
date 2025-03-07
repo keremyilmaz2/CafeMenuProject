@@ -1,0 +1,24 @@
+3
+---------------------------------
+Odemesi Alinanlar: 
+DOUBLE ESPRESSO X1 --- 90 
+AMERICANO X1 --- 95 
+FLAT WHITE X1 --- 100 
+ICE FILTRE KAHVE X1 --- 100 
+ICE WHITE MOCHA X1 --- 120 
+
+
+Iptal Edilenler: 
+
+Nakit =>220
+
+Kredi Karti =>285
+
+Iskonto =>0
+
+Ikram =>
+
+
+
+
+

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<TableNoDto>
+
+<style>
+    .masa {
+        background-color: yellow;
+    }
+
+    .dolu {
+        background-color: red;
+        color: white;
+    }
+
+    .masa-card {
+        cursor: pointer;
+    }
+</style>
+
+<h2>Masa Durumları</h2>
+
+<div class="container">
+    <div class="row" id="tableContainer">
+        @foreach (var table in Model)
+        {
+            string masaClass = table.IsOccupied ? "dolu" : "masa";
+            <div class="col-md-3 mb-4">
+                <div class="card masa-card @masaClass" id="masa-@table.Id" onclick="masaSec(@table.Id)">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Masa @table.MasaNo</h5>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js"></script>
+
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://order.justkey.online/hubs/TableHub", {
+                withCredentials: true
+            })
+            .build();
+
+        async function startConnection() {
+            try {
+                await connection.start();
+                console.log("SignalR bağlantısı başarılı.");
+            } catch (err) {
+                console.error("SignalR bağlantısı başarısız:", err);
+                setTimeout(startConnection, 5000);
+            }
+        }
+
+        startConnection();
+
+        connection.on("ReceiveTableStatusUpdate", function (tables) {
+            console.log("Gelen masalar:", tables);
+            let shouldReload = false;
+
+            tables.forEach(function (table) {
+                console.log(`Masa ID: ${table.id}, Dolu mu? ${table.isOccupied}`);
+                const card = document.getElementById("masa-" + table.id);
+
+                if (card) {
+                    if (table.isOccupied) {
+                        card.classList.remove('masa');
+                        card.classList.add('dolu');
+                        shouldReload = true; // Eğer masa dolduysa yeniden yükleme işareti
+                    } else {
+                        card.classList.remove('dolu');
+                        card.classList.add('masa');
+                    }
+                }
+            });
+
+            // Eğer bir masa doluysa sayfayı yeniden yükle
+            if (shouldReload) {
+                setTimeout(() => {
+                    location.reload(); // Sayfayı yeniden yükle
+                }, 500); // 2 saniye bekledikten sonra yeniden yükle
+            }
+        });
+
+        // Masa seçimi fonksiyonu
+        function masaSec(masaNo) {
+            const card = document.getElementById("masa-" + masaNo);
+            const isOccupied = card.classList.contains('dolu');
+
+            if (isOccupied) {
+                window.location.href = '/Order/TableDetails/' + masaNo;
+            } else {
+                alert('Şu anda masa boş, lütfen dolu bir masa seçiniz.');
+            }
+        }
+    </script>
+}
+
+
+

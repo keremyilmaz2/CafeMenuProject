@@ -1,0 +1,255 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Calia.Web
+build_property.RootNamespace = Calia.Web
+build_property.ProjectDir = C:\Users\kerem\OneDrive\Masaüstü\ProjectsForCafe\Calia\Calia.Web\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\kerem\OneDrive\Masaüstü\ProjectsForCafe\Calia\Calia.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Auth/ShowUsers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxTaG93VXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Category/CategoryCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ2F0ZWdvcnlDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Category/CategoryDelete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ2F0ZWdvcnlEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Category/CategoryEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ2F0ZWdvcnlFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Category/CategoryIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ2F0ZWdvcnlJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Extra/ExtraCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXh0cmFcRXh0cmFDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Extra/ExtraEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXh0cmFcRXh0cmFFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Extra/ExtraIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXh0cmFcRXh0cmFJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/AdminIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZG1pbkluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/GunSonu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHdW5Tb251LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/IkramEdilenUrunler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJa3JhbUVkaWxlblVydW5sZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/Iletisim.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbGV0aXNpbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/Iptaller.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJcHRhbGxlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/KalanTatlilar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxLYWxhblRhdGxpbGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/MainIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYWluSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/Malzemeler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYWx6ZW1lbGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/MasaGunlukRapor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYXNhR3VubHVrUmFwb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/MasaToplamKazanc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYXNhVG9wbGFtS2F6YW5jLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/ProductDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0RGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/Products.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/SatilanUrunler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTYXRpbGFuVXJ1bmxlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Home/TableDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUYWJsZURldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Material/MaterialCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcTWF0ZXJpYWxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Material/MaterialEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcTWF0ZXJpYWxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Material/MaterialIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0ZXJpYWxcTWF0ZXJpYWxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Order/AddTable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcQWRkVGFibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Order/GetTables.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcR2V0VGFibGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Order/Gider.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcR2lkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Order/Masalar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcTWFzYWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Order/OrderDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Order/TableDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcVGFibGVEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Print/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Print/Result.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJpbnRcUmVzdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Product/ProductCount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0Q291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Product/ProductCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0Q3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Product/ProductDelete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Product/ProductEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0RWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Product/ProductIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Product/ProductSettingExtra.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0U2V0dGluZ0V4dHJhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Product/ProductSettingMaterial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxQcm9kdWN0U2V0dGluZ01hdGVyaWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Shared/_Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/ShoppingCart/CartCaliaIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdDYXJ0XENhcnRDYWxpYUluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/ShoppingCart/CartIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdDYXJ0XENhcnRJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/ShoppingCart/CheckOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdDYXJ0XENoZWNrT3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/ShoppingCart/Confirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdDYXJ0XENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Stock/StockEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcU3RvY2tFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Stock/StockIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tcU3RvY2tJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-1mvxaitswv
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Shared/_LayoutCalia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDYWxpYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-6c62roxdah
+
+[C:/Users/kerem/OneDrive/Masaüstü/ProjectsForCafe/Calia/Calia.Web/Views/Shared/_LayoutCallia.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDYWxsaWEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ww68b6m2ry

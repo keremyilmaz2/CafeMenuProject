@@ -1,0 +1,134 @@
+﻿@model IEnumerable<ProductDto>
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCallia.cshtml";
+}
+
+<style>
+    .cart-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+        .cart-header h6 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+    .btn-outline-primary {
+        padding: 8px 16px;
+        border-radius: 6px;
+    }
+
+    .w-32-px {
+        width: 32px;
+    }
+
+    .h-32-px {
+        height: 32px;
+    }
+
+    .rounded-circle {
+        border-radius: 50%;
+    }
+
+    .text-md {
+        font-size: 1rem;
+    }
+
+    .text-sm {
+        font-size: 0.875rem;
+    }
+
+    .fw-normal {
+        font-weight: normal;
+    }
+
+    .bg-danger-focus, .bg-success-focus {
+        padding: 8px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+    }
+</style>
+
+
+<div class="dashboard-main-body">
+    <div class="card basic-data-table">
+        <div class="cart-header d-flex align-items-center justify-content-between flex-wrap gap-2 mb-20">
+            <h6 class="fw-bold text-lg mb-0">Ürünler Listesi</h6>
+            <div class="text-end">
+                <a asp-action="ProductCreate" class="btn btn-outline-primary">
+                    <i class="bi bi-plus-square"></i> Yeni Ürün Oluştur
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <!-- Wrap your table with responsive class -->
+                <table class="table bordered-table mb-0 dataTable" id="dataTable">
+                    <thead>
+                        <tr role="row">
+                            <th scope="col">Ürün İsmi</th>
+                            <th scope="col">Fiyatı</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex flex-column">
+                                        <h6 class="text-md mb-0 fw-normal">@product.Name</h6>
+                                        <span class="text-sm text-secondary-light fw-normal">@product.Category.Name</span>
+                                    </div>
+                                </td>
+                                <td>@string.Format(new System.Globalization.CultureInfo("tr-TR"), "{0:C}", product.Price)</td>
+                                <td class="text-center">
+                                    <a asp-action="ProductDelete" asp-route-productId="@product.ProductId" class="w-32-px h-32-px bg-danger-focus text-danger-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                                        <iconify-icon icon="mingcute:delete-2-line"></iconify-icon>
+                                    </a>
+                                    <a asp-action="ProductEdit" asp-route-ProductId="@product.ProductId" class="w-32-px h-32-px bg-success-focus text-success-main rounded-circle d-inline-flex align-items-center justify-content-center">
+                                        <iconify-icon icon="lucide:edit"></iconify-icon>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DataTables CSS & JS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            "pageLength": 10,
+            "order": [[0, "asc"]],
+            "responsive": true, // Enable responsiveness
+            "autoWidth": false // Disable auto width calculation
+        });
+    });
+</script>

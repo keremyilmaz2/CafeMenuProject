@@ -1,0 +1,83 @@
+﻿@model RaporVM
+
+
+@{
+    ViewData["Title"] = "Menu Page";
+    Layout = "~/Views/Shared/_LayoutCallia.cshtml";
+}
+
+<div class="col-xxl-12">
+    <div class="card h-100">
+        <div class="card-body p-24">
+            <div class="d-flex align-items-center flex-wrap gap-2 justify-content-between mb-20">
+                <h6 class="mb-2 fw-bold text-lg mb-0">Kalan Tatlılar</h6>
+                <a asp-controller="Home" asp-action="AdminIndex" class="text-primary-600 hover-text-primary d-flex align-items-center gap-1">
+                    Geri Dön
+                    <iconify-icon icon="solar:alt-arrow-right-linear" class="icon"></iconify-icon>
+                </a>
+            </div>
+            <div class="table-responsive scroll-sm">
+                <table class="table bordered-table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tatlılar</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">
+                                <div class="max-w-112 mx-auto">
+                                    <span>Stok</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var kalanTatlilar in Model.KalanTatlılar)
+                        {
+                            // Stok durumu
+                            int stockLevel = kalanTatlilar.AvailableProducts; // Kalan tatlının stok miktarı
+                            string stockStatus; // Stok durumu için mesaj
+                            string progressBarColor; // İlerleme çubuğunun rengi
+                            double progressPercentage; // İlerleme çubuğu yüzdesi
+
+                            // Stok durumuna göre ayarları belirle
+                            if (stockLevel > 15)
+                            {
+                                stockStatus = "Yüksek Stok";
+                                progressBarColor = "bg-success"; // Yeşil renk
+                                progressPercentage = 100; // %100
+                            }
+                            else if (stockLevel > 5)
+                            {
+                                stockStatus = "Orta Stok";
+                                progressBarColor = "bg-warning"; // Sarı renk
+                                progressPercentage = (double)stockLevel / 20 * 100; // Stok seviyesine göre yüzde
+                            }
+                            else
+                            {
+                                stockStatus = "Düşük Stok";
+                                progressBarColor = "bg-danger"; // Kırmızı renk
+                                progressPercentage = (double)stockLevel / 20 * 100; // Stok seviyesine göre yüzde
+                            }
+
+                            <tr>
+                                <td>@kalanTatlilar.Name</td>
+                                <td>@string.Format(new System.Globalization.CultureInfo("tr-TR"), "{0:C}", kalanTatlilar.Price)</td>
+                                <td>
+                                    <div class="max-w-112 mx-auto">
+                                        <div class="w-100">
+                                            <div class="progress progress-sm rounded-pill" role="progressbar" aria-label="Stock Status" aria-valuenow="@progressPercentage" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar @progressBarColor rounded-pill" style="width: @progressPercentage%;"></div>
+                                            </div>
+                                        </div>
+                                        <span class="mt-12 text-secondary-light text-sm fw-medium">@stockStatus - @stockLevel adet kaldı</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+25
+---------------------------------
+
+Odemesi Alinanlar: 
+CORTADO X1 --- 100
+
+
+
+
+
+
+
+
+
+
+Iptal Edilenler: 
+ZEBRA MOCHA X1 --- 110
+MOCHA X1 --- 100
+ÇAY X1 --- 30
+SÜTLÜ ÇAY X1 --- 65
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ikram Edilenler: 
+BLACK EYE X1 --- 110
+DEATH EYE X1 --- 120
+
+
+
+
+
+
+
+
+
+
+Nakit => 100
+Kredi Karti => 5
+Iskonto => 90
+Ikram => 230
+
+
+
+
+

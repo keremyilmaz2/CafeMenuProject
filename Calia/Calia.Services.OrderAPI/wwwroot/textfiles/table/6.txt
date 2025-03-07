@@ -1,0 +1,17 @@
+6
+---------------------------------
+Odemesi Alinanlar: 
+SU X0 --- 0 
+Iptal Edilenler: 
+Nakit =>0
+
+Kredi Karti =>0
+
+Iskonto =>
+
+Ikram =>30
+
+
+
+
+
