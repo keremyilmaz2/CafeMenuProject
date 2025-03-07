@@ -1,7 +1,6 @@
-30
+1
 ---------------------------------
-DOUBLE ESPRESSO X1 
-CORTADO X1 
+AMERICANO X1 
 
 
 
