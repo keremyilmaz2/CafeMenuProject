@@ -1,2 +1,16 @@
 .vs/
 Callia/.vs/
+/Calia/Calia.Services.ProductAPI/obj/Debug/net8.0/Calia.Services.ProductAPI.AssemblyInfo.cs
+/Calia/Calia.Services.ProductAPI/obj/Debug/net8.0/Calia.Services.ProductAPI.AssemblyInfoInputs.cache
+/Calia/Calia.Services.AuthAPI/obj/Debug/net8.0/Calia.Services.AuthAPI.AssemblyInfo.cs
+/Calia/Calia.Services.AuthAPI/obj/Debug/net8.0/Calia.Services.AuthAPI.AssemblyInfoInputs.cache
+/Calia/Calia.Services.CategoryAPI/obj/Debug/net8.0/Calia.Services.CategoryAPI.AssemblyInfo.cs
+/Calia/Calia.Services.CategoryAPI/obj/Debug/net8.0/Calia.Services.CategoryAPI.AssemblyInfoInputs.cache
+/Calia/Calia.Services.OrderAPI/obj/Debug/net8.0/Calia.Services.OrderAPI.AssemblyInfoInputs.cache
+/Calia/Calia.Services.OrderAPI/obj/Debug/net8.0/Calia.Services.OrderAPI.AssemblyInfo.cs
+/Calia/Calia.Services.ShoppingCartAPI/obj/Debug/net8.0/Calia.Services.ShoppingCartAPI.AssemblyInfo.cs
+/Calia/Calia.Services.ShoppingCartAPI/obj/Debug/net8.0/Calia.Services.ShoppingCartAPI.AssemblyInfoInputs.cache
+/Calia/Calia.Services.StockAPI/obj/Debug/net8.0/Calia.Services.StockAPI.AssemblyInfo.cs
+/Calia/Calia.Services.StockAPI/obj/Debug/net8.0/Calia.Services.StockAPI.AssemblyInfoInputs.cache
+/Calia/Calia.Web/obj/Debug/net8.0/Calia.Web.AssemblyInfo.cs
+/Calia/Calia.Web/obj/Debug/net8.0/Calia.Web.AssemblyInfoInputs.cache
