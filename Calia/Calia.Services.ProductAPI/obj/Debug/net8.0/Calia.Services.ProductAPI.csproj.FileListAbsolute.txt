@@ -282,3 +282,4 @@ C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ProductAPI
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ProductAPI\obj\Debug\net8.0\Calia.Services.ProductAPI.pdb
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ProductAPI\obj\Debug\net8.0\Calia.Services.ProductAPI.genruntimeconfig.cache
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ProductAPI\obj\Debug\net8.0\ref\Calia.Services.ProductAPI.dll
+C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ProductAPI\obj\Debug\net8.0\Calia.Services.ProductAPI.sourcelink.json

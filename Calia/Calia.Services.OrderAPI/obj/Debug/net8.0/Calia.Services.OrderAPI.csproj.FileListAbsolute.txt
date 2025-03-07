@@ -294,3 +294,4 @@ C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.OrderAPI\o
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.OrderAPI\obj\Debug\net8.0\Calia.Services.OrderAPI.pdb
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.OrderAPI\obj\Debug\net8.0\Calia.Services.OrderAPI.genruntimeconfig.cache
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.OrderAPI\obj\Debug\net8.0\ref\Calia.Services.OrderAPI.dll
+C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.OrderAPI\obj\Debug\net8.0\Calia.Services.OrderAPI.sourcelink.json

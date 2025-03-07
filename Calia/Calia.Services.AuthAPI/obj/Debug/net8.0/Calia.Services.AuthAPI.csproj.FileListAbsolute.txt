@@ -292,3 +292,4 @@ C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.AuthAPI\ob
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.AuthAPI\obj\Debug\net8.0\Calia.Services.AuthAPI.pdb
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.AuthAPI\obj\Debug\net8.0\Calia.Services.AuthAPI.genruntimeconfig.cache
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.AuthAPI\obj\Debug\net8.0\ref\Calia.Services.AuthAPI.dll
+C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.AuthAPI\obj\Debug\net8.0\Calia.Services.AuthAPI.sourcelink.json

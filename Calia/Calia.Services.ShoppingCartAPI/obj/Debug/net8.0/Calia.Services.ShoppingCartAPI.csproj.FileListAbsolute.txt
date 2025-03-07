@@ -282,3 +282,4 @@ C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ShoppingCa
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ShoppingCartAPI\obj\Debug\net8.0\Calia.Services.ShoppingCartAPI.pdb
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ShoppingCartAPI\obj\Debug\net8.0\Calia.Services.ShoppingCartAPI.genruntimeconfig.cache
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ShoppingCartAPI\obj\Debug\net8.0\ref\Calia.Services.ShoppingCartAPI.dll
+C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.ShoppingCartAPI\obj\Debug\net8.0\Calia.Services.ShoppingCartAPI.sourcelink.json

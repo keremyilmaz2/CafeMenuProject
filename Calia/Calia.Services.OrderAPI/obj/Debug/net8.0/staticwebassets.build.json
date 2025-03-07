@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LLvFiTXfZaFNxnYP3+n3A7j8M2mxp4e2hgBUD0pzJoc=",
+  "Hash": "d3z+rmWRArZ8EiWcMtCcld8LIhSeyFS212VydQ4rpcc=",
   "Source": "Calia.Services.OrderAPI",
   "BasePath": "_content/Calia.Services.OrderAPI",
   "Mode": "Default",
@@ -2409,6 +2409,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\textfiles\\table\\4.txt"
+    },
+    {
+      "Identity": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\Calia.Services.OrderAPI\\wwwroot\\textfiles\\table\\5.txt",
+      "SourceId": "Calia.Services.OrderAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\Calia.Services.OrderAPI\\wwwroot\\",
+      "BasePath": "_content/Calia.Services.OrderAPI",
+      "RelativePath": "textfiles/table/5.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\textfiles\\table\\5.txt"
     },
     {
       "Identity": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\Calia.Services.OrderAPI\\wwwroot\\textfiles\\table\\6.txt",

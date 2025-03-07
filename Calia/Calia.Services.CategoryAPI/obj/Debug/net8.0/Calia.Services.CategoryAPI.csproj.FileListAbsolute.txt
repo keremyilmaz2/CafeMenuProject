@@ -280,3 +280,4 @@ C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.CategoryAP
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.CategoryAPI\obj\Debug\net8.0\Calia.Services.CategoryAPI.pdb
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.CategoryAPI\obj\Debug\net8.0\Calia.Services.CategoryAPI.genruntimeconfig.cache
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.CategoryAPI\obj\Debug\net8.0\ref\Calia.Services.CategoryAPI.dll
+C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.CategoryAPI\obj\Debug\net8.0\Calia.Services.CategoryAPI.sourcelink.json

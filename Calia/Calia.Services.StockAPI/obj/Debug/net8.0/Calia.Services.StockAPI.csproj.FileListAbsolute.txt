@@ -278,3 +278,4 @@ C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.StockAPI\o
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.StockAPI\obj\Debug\net8.0\Calia.Services.StockAPI.pdb
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.StockAPI\obj\Debug\net8.0\Calia.Services.StockAPI.genruntimeconfig.cache
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.StockAPI\obj\Debug\net8.0\ref\Calia.Services.StockAPI.dll
+C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Services.StockAPI\obj\Debug\net8.0\Calia.Services.StockAPI.sourcelink.json

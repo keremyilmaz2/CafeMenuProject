@@ -110,3 +110,4 @@ C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Web\obj\Debug\net8.
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Web\obj\Debug\net8.0\Calia.Web.pdb
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Web\obj\Debug\net8.0\Calia.Web.genruntimeconfig.cache
 C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Web\obj\Debug\net8.0\ref\Calia.Web.dll
+C:\Users\kerem\OneDrive\Masaüstü\CalliaProject\Calia\Calia.Web\obj\Debug\net8.0\Calia.Web.sourcelink.json

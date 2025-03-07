@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Calia.Services.AuthAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+791f893fc2ff25c2d68391ca318fe118599e776c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b59a875300947e09e14669d879c0f86498c5229")]
 [assembly: System.Reflection.AssemblyProductAttribute("Calia.Services.AuthAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Calia.Services.AuthAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
