@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    hostname: "rabbitmq"  
+    ports:
+      - "5672:5672"      
+      - "15672:15672"    
+    networks:
+      - app-network
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq/mnesia
+  mssql_db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Keremkerem11/
+    ports:
+      - "1433:1433"  # MSSQL port
+    networks:
+      - app-network
+    volumes:
+      - sql_data:/var/opt/mssql  
+
+
+volumes:
+  sql_data:
+  rabbitmq:
