@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Calia.Services.CategoryAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+791f893fc2ff25c2d68391ca318fe118599e776c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Calia.Services.CategoryAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Calia.Services.CategoryAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
