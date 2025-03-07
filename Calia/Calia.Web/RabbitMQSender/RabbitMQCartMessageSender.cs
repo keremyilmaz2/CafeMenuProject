@@ -13,7 +13,7 @@ namespace Calia.Services.ShoppingCartAPI.RabbitMQSender
 
         public RabbitMQCartMessageSender()
         {   
-            _hostName = "localhost";
+            _hostName = "rabbitmq";
             _password = "guest";
             _userName = "guest";
         }
