@@ -19,7 +19,26 @@ bin/
 obj/
 **/bin/
 **/obj/
+# Tüm projelerdeki bin ve obj klasörlerini göz ardı et
+**/bin/
+**/obj/
 
+# Özellikle bazılarının içine de göz at, her ihtimale karşı
+**/Calia.Services.AuthAPI/bin/
+**/Calia.Services.AuthAPI/obj/
+**/Calia.Services.CategoryAPI/bin/
+**/Calia.Services.CategoryAPI/obj/
+**/Calia.Services.OrderAPI/bin/
+**/Calia.Services.OrderAPI/obj/
+**/Calia.Services.ProductAPI/bin/
+**/Calia.Services.ProductAPI/obj/
+**/Calia.Services.ShoppingCartAPI/bin/
+**/Calia.Services.ShoppingCartAPI/obj/
+**/Calia.Services.StockAPI/bin/
+**/Calia.Services.StockAPI/obj/
+
+*/**/bin/
+*/**/obj/
 
 
 
