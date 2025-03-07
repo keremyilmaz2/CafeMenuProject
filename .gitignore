@@ -14,3 +14,8 @@ Callia/.vs/
 /Calia/Calia.Services.StockAPI/obj/Debug/net8.0/Calia.Services.StockAPI.AssemblyInfoInputs.cache
 /Calia/Calia.Web/obj/Debug/net8.0/Calia.Web.AssemblyInfo.cs
 /Calia/Calia.Web/obj/Debug/net8.0/Calia.Web.AssemblyInfoInputs.cache
+# .gitignore dosyasına ekleyin
+bin/
+obj/
+
+
