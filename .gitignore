@@ -17,5 +17,9 @@ Callia/.vs/
 # .gitignore dosyasına ekleyin
 bin/
 obj/
+**/bin/
+**/obj/
+
+
 
 
