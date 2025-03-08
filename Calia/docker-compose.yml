@@ -34,10 +34,11 @@ services:
     volumes:
       - sql_data:/var/opt/mssql
     healthcheck:
-      test: ["CMD", "/opt/mssql/bin/sqlservr", "--help"]
+      test: ["CMD", "bash", "-c", "pgrep sqlservr || exit 1"]
       interval: 10s
       retries: 5
-      start_period: 30s
+      start_period: 30s  
+
 
 
   auth_api:
