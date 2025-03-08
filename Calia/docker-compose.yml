@@ -7,27 +7,180 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
-    hostname: "rabbitmq"  
+    hostname: "rabbitmq"
     ports:
-      - "5672:5672"      
-      - "15672:15672"    
+      - "5672:5672"
+      - "15672:15672"
     networks:
       - app-network
     volumes:
       - rabbitmq:/var/lib/rabbitmq/mnesia
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      retries: 5
+      start_period: 20s
+
   mssql_db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: mssql_db
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Keremkerem11/
+      - SA_PASSWORD=Keremkerem11!
     ports:
-      - "1433:1433"  # MSSQL port
+      - "1433:1433"
     networks:
       - app-network
     volumes:
-      - sql_data:/var/opt/mssql  
+      - sql_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD", "bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Keremkerem11!' -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
 
+  auth_api:
+    build:
+      context: .
+      dockerfile: Calia.Services.AuthAPI/Dockerfile
+    container_name: auth_api
+    ports:
+      - "5001:8080"
+    depends_on:
+      mssql_db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=AuthDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq
+
+  order_api:
+    build:
+      context: .
+      dockerfile: Calia.Services.OrderAPI/Dockerfile
+    container_name: order_api
+    ports:
+      - "5002:8080"
+    depends_on:
+      auth_api:
+        condition: service_started
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=OrderDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq
+
+  category_api:
+    build:
+      context: .
+      dockerfile: Calia.Services.CategoryAPI/Dockerfile
+    container_name: category_api
+    ports:
+      - "5003:8080"
+    depends_on:
+      auth_api:
+        condition: service_started
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=CategoryDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+
+  product_api:
+    build:
+      context: .
+      dockerfile: Calia.Services.ProductAPI/Dockerfile
+    container_name: product_api
+    ports:
+      - "5004:8080"
+    depends_on:
+      auth_api:
+        condition: service_started
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=ProductDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+
+  shoppingcart_api:
+    build:
+      context: .
+      dockerfile: Calia.Services.ShoppingCartAPI/Dockerfile
+    container_name: shoppingcart_api
+    ports:
+      - "5005:8080"
+    depends_on:
+      auth_api:
+        condition: service_started
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=ShoppingCartDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+
+  stock_api:
+    build:
+      context: .
+      dockerfile: Calia.Services.StockAPI/Dockerfile
+    container_name: stock_api
+    ports:
+      - "5006:8080"
+    depends_on:
+      auth_api:
+        condition: service_started
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=StockDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+
+  calia_web:
+    build:
+      context: .
+      dockerfile: Calia.Web/Dockerfile
+    container_name: calia_web
+    ports:
+      - "5000:8080"
+    depends_on:
+      auth_api:
+        condition: service_healthy
+      order_api:
+        condition: service_healthy
+      category_api:
+        condition: service_healthy
+      product_api:
+        condition: service_healthy
+      shoppingcart_api:
+        condition: service_healthy
+      stock_api:
+        condition: service_healthy
+    networks:
+      - app-network
+    environment:
+      - AUTH_API_URL=http://auth_api:8080
+      - ORDER_API_URL=http://order_api:8080
+      - PRODUCT_API_URL=http://product_api:8080
+      - CATEGORY_API_URL=http://category_api:8080
+      - SHOPPINGCART_API_URL=http://shoppingcart_api:8080
+      - STOCK_API_URL=http://stock_api:8080
+
+networks:
+  app-network:
 
 volumes:
   sql_data:

@@ -11,7 +11,12 @@ using Calia.Web.Messaging;
 using Mango.Services.EmailAPI.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var environment = builder.Environment.EnvironmentName;
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true)
+    .AddEnvironmentVariables();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
