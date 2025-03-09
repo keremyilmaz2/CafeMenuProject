@@ -22,8 +22,9 @@ do
 
   FILE_INFO=$(/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Keremkerem11!' -Q "RESTORE FILELISTONLY FROM DISK = '$BAK_FILE';" -s "|" -W | tail -n +3)
 
-  MDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" '{print $1}' | xargs | head -n 1)
-  LDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" '{print $1}' | xargs | tail -n 1)
+  MDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" 'NR==1 {print $1}' | xargs)
+  LDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" 'NR==2 {print $1}' | xargs)
+
 
   echo "✅ MDF Logical Name: $MDF_LOGICAL_NAME"
   echo "✅ LDF Logical Name: $LDF_LOGICAL_NAME"
