@@ -29,7 +29,8 @@ services:
       - app-network
     volumes:
       - sql_data:/var/opt/mssql
-      - ./DBBackups:/var/opt/mssql/backups  # Backup dosyalarını mount ediyoruz
+      - ./DBBackups:/var/opt/mssql/backups
+      - ./mssql/restore-db.sh:/var/opt/mssql/restore-db.sh # Bunu ekledik  # Backup dosyalarını mount ediyoruz
     restart: always
 
   auth_api:
