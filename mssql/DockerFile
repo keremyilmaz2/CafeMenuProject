@@ -1,11 +1,17 @@
 FROM mcr.microsoft.com/mssql/server:2022-latest
 
-# Root yetkisine geç
+# Root yetkisi al
 USER root
 
-# Paket yükleme işlemlerini root olarak gerçekleştir
+# Önce eski ve çakışan paketleri kaldır
+RUN apt-get update && apt-get remove -y libodbc2 unixodbc-common && \
+    apt-get autoremove -y && apt-get clean
+
+# apt-get hatasını gidermek için eksik dizinleri oluştur ve izinleri değiştir
+RUN mkdir -p /var/lib/apt/lists/partial && chmod -R 777 /var/lib/apt/lists
+
+# SQLCMD ve MSSQL Tools yükleme
 RUN apt-get update && apt-get install -y curl gnupg && \
-    mkdir -p /var/lib/apt/lists/partial && chmod -R 777 /var/lib/apt/lists && \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
     curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
     apt-get update && ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev && \
