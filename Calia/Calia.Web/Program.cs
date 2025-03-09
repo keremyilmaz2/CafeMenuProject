@@ -18,6 +18,7 @@ builder.Configuration
     .AddJsonFile($"appsettings.{environment}.json", optional: true)
     .AddEnvironmentVariables();
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
@@ -133,6 +134,13 @@ app.UseCors("AllowSpecificOrigin");
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.Use(async (context, next) =>
+{
+    context.Items["ShoppingCartAPI"] = SD.ShoppingCartAPIBase;
+    await next();
+});
+
 
 app.UseEndpoints(endpoints =>
 {

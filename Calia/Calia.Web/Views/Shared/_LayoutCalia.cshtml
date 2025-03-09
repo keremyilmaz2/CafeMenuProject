@@ -186,8 +186,11 @@
     
 
     <script>
+        const shoppingCartApiBase = "@Context.Items["ShoppingCartAPI"]";
+
+        
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("https://localhost:7003/hubs/CartHub", {
+            .withUrl(`${shoppingCartApiBase}/hubs/CartHub`, {
                 withCredentials: true
             })
             .build();
@@ -206,7 +209,7 @@
         async function getCart() {
             const sessionId = "@ViewBag.UserId"; // Kullanıcının oturum kimliğini buraya yerleştirin
             try {
-                const response = await fetch(`https://localhost:7003/api/Cart/GetCart/${sessionId}`);
+                const response = await fetch(`${shoppingCartApiBase}/api/Cart/GetCart/${sessionId}`);
                 const data = await response.json();
                 if (data.isSuccess) {
                     const count = data.result.cartDetails.reduce((acc, item) => acc + item.count, 0); // Tüm ürünlerin sayısını hesapla
