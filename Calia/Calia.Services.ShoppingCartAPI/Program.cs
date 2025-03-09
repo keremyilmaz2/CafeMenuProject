@@ -73,13 +73,13 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials(); // Kimlik bilgilerini kullanmayı sağlamak için
-    });
+    options.AddPolicy("SignalRCorsPolicy",
+        builder => builder
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .SetIsOriginAllowed(origin => true) // Tüm originleri kabul et
+    );
 });
 
 // SignalR servisini ekle
@@ -97,7 +97,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 //app.UseCors("AllowSpecificOrigin"); 
-app.UseCors("AllowAll");
+app.UseCors("SignalRCorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
