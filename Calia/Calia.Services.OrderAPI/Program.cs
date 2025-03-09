@@ -81,11 +81,22 @@ builder.Services.AddSwaggerGen(option =>
 
 builder.AddAppAuthetication();
 builder.Services.AddAuthorization();
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowSpecificOrigin", builder =>
+//    {
+//        builder.WithOrigins("https://api.printnode.com/", "https://justkey.online", "https://localhost:7270", "https://order.justkey.online") // İstemci uygulamanızın URL'si
+//               .AllowAnyMethod()
+//               .AllowAnyHeader()
+//               .AllowCredentials(); // Kimlik bilgilerini kullanmayı sağlamak için
+//    });
+//});
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", builder =>
+    options.AddPolicy("AllowAll", builder =>
     {
-        builder.WithOrigins("https://api.printnode.com/", "https://justkey.online", "https://localhost:7270", "https://order.justkey.online") // İstemci uygulamanızın URL'si
+        builder
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials(); // Kimlik bilgilerini kullanmayı sağlamak için
@@ -107,7 +118,9 @@ Stripe.StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:Sec
 app.UseHttpsRedirection();
 
 app.UseRouting();
-app.UseCors("AllowSpecificOrigin"); // CORS kullanımı
+//app.UseCors("AllowSpecificOrigin"); // CORS kullanımı
+app.UseCors("AllowAll");
+
 
 app.UseAuthentication();
 app.UseAuthorization();

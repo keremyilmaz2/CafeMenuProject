@@ -59,11 +59,23 @@ builder.Services.AddSwaggerGen(option =>
 });
 builder.AddAppAuthetication();
 builder.Services.AddAuthorization();
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowSpecificOrigin", builder =>
+//    {
+//        builder.WithOrigins("https://localhost:7270", "https://shoppingcart.justkey.online", "https://justkey.online") // İstemci uygulamanızın URL'si
+//               .AllowAnyMethod()
+//               .AllowAnyHeader()
+//               .AllowCredentials(); // Kimlik bilgilerini kullanmayı sağlamak için
+//    });
+//});
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin", builder =>
+    options.AddPolicy("AllowAll", builder =>
     {
-        builder.WithOrigins("https://localhost:7270", "https://shoppingcart.justkey.online", "https://justkey.online") // İstemci uygulamanızın URL'si
+        builder
                .AllowAnyMethod()
                .AllowAnyHeader()
                .AllowCredentials(); // Kimlik bilgilerini kullanmayı sağlamak için
@@ -84,7 +96,8 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseRouting();
-app.UseCors("AllowSpecificOrigin"); // CORS kullanımı
+//app.UseCors("AllowSpecificOrigin"); 
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
