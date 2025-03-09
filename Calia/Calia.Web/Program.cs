@@ -138,6 +138,7 @@ app.UseAuthorization();
 app.Use(async (context, next) =>
 {
     context.Items["ShoppingCartAPI"] = SD.ShoppingCartAPIBase;
+    context.Items["OrderAPI"] = SD.OrderAPIAPIBase;
     await next();
 });
 

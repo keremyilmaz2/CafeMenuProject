@@ -39,8 +39,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js"></script>
 
     <script>
+        const shoppingCartApiBase = "@Context.Items["OrderAPI"]";
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("https://order.justkey.online/hubs/TableHub", {
+            .withUrl(`${shoppingCartApiBase}/hubs/TableHub`, {
                 withCredentials: true
             })
             .build();
