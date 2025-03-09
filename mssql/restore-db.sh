@@ -18,32 +18,31 @@ do
     continue
   fi
 
-  echo "📌 $dbDB_restore için dosya bilgileri alınıyor..."
+  echo "📌 $dbDB için dosya bilgileri alınıyor..."
 
   FILE_INFO=$(/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Keremkerem11!' -Q "RESTORE FILELISTONLY FROM DISK = '$BAK_FILE';" -s "|" -W | tail -n +3)
 
-  MDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" 'NR==1 {print $1}' | xargs)
-  LDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" 'NR==2 {print $1}' | xargs)
-
+  MDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" '$3 ~ /D/ {print $1}' | xargs)
+  LDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" '$3 ~ /L/ {print $1}' | xargs)
 
   echo "✅ MDF Logical Name: $MDF_LOGICAL_NAME"
   echo "✅ LDF Logical Name: $LDF_LOGICAL_NAME"
 
-  echo "🔄 $dbDB_restore geri yükleniyor..."
+  echo "🔄 $dbDB geri yükleniyor..."
 
   /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Keremkerem11!' -Q "
-  RESTORE DATABASE ${db}DB_restore 
+  RESTORE DATABASE ${db}DB 
   FROM DISK = '$BAK_FILE'
-  WITH MOVE '$MDF_LOGICAL_NAME' TO '/var/opt/mssql/data/$MDF_LOGICAL_NAME.mdf',
-       MOVE '$LDF_LOGICAL_NAME' TO '/var/opt/mssql/data/$LDF_LOGICAL_NAME.ldf',
+  WITH MOVE '$MDF_LOGICAL_NAME' TO '/var/opt/mssql/data/${db}DB.mdf',
+       MOVE '$LDF_LOGICAL_NAME' TO '/var/opt/mssql/data/${db}DB.ldf',
        REPLACE;"
 
   if [ $? -ne 0 ]; then
-    echo "❌ HATA: $dbDB_restore geri yüklenirken bir sorun oluştu!"
+    echo "❌ HATA: $dbDB geri yüklenirken bir sorun oluştu!"
     exit 1
   fi
 
-  echo "✅ $dbDB_restore başarıyla geri yüklendi!"
+  echo "✅ $dbDB başarıyla geri yüklendi!"
 done
 
 echo "🎉 Tüm veritabanları başarıyla geri yüklendi!"
