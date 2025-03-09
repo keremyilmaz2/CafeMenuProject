@@ -28,6 +28,9 @@ services:
       - app-network
     volumes:
       - sql_data:/var/opt/mssql
+      - ./DBBackups:/var/opt/mssql/backups  # Backup dosyalarını mount ediyoruz
+      - ./restore-db.sh:/docker-entrypoint-initdb.d/restore-db.sh  # Restore scripti mount ediliyor
+    entrypoint: [ "/bin/bash", "-c", "/docker-entrypoint-initdb.d/restore-db.sh" ]
 
   auth_api:
     build:
