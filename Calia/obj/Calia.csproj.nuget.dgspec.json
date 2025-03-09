@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kerem\\OneDrive\\Masaüstü\\ProjectsForCafe\\Calia\\Calia.csproj": {}
+    "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\Calia.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kerem\\OneDrive\\Masaüstü\\ProjectsForCafe\\Calia\\Calia.csproj": {
+    "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\Calia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\ProjectsForCafe\\Calia\\Calia.csproj",
+        "projectUniqueName": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\Calia.csproj",
         "projectName": "Calia",
-        "projectPath": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\ProjectsForCafe\\Calia\\Calia.csproj",
+        "projectPath": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\Calia.csproj",
         "packagesPath": "C:\\Users\\kerem\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\ProjectsForCafe\\Calia\\obj\\",
+        "outputPath": "C:\\Users\\kerem\\OneDrive\\Masaüstü\\CalliaProject\\Calia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kerem\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -46,9 +46,61 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.20.0, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Serilog.Enrichers.Environment": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.Enrichers.Thread": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "Serilog.Expressions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Serilog.Formatting.Compact": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Serilog.Settings.Configuration": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Serilog.Sinks.Grafana.Loki": {
+              "target": "Package",
+              "version": "[8.3.0, )"
             }
           },
           "imports": [
