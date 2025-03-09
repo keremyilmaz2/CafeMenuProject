@@ -69,14 +69,6 @@ builder.Services.AddCors(options =>
                .AllowCredentials(); // Kimlik bilgilerini kullanmayı sağlamak için
     });
 });
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(5000); // HTTP için tüm IP'lerden istek al
-    options.ListenAnyIP(5001, listenOptions =>
-    {
-        listenOptions.UseHttps(); // HTTPS için
-    });
-});
 
 // SignalR servisini ekle
 builder.Services.AddSignalR();
