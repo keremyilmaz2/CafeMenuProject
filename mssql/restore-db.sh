@@ -20,10 +20,10 @@ do
 
   echo "📌 $dbDB için dosya bilgileri alınıyor..."
 
-  FILE_INFO=$(/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Keremkerem11!' -Q "RESTORE FILELISTONLY FROM DISK = '$BAK_FILE';" -s "|" -W | tail -n +3)
+  FILE_INFO=$(/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Keremkerem11!' -Q "RESTORE FILELISTONLY FROM DISK = '$BAK_FILE';" -s "|" -W)
 
-  MDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" '$3 ~ /D/ {print $1}' | xargs)
-  LDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" '$3 ~ /L/ {print $1}' | xargs)
+  MDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" 'NR==3 {print $1}' | xargs)
+  LDF_LOGICAL_NAME=$(echo "$FILE_INFO" | awk -F "|" 'NR==4 {print $1}' | xargs)
 
   echo "✅ MDF Logical Name: $MDF_LOGICAL_NAME"
   echo "✅ LDF Logical Name: $LDF_LOGICAL_NAME"
