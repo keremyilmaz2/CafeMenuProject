@@ -17,7 +17,8 @@ services:
       - rabbitmq:/var/lib/rabbitmq/mnesia
 
   mssql_db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    build:
+      context: ./mssql  # Dockerfile ve restore-db.sh buraya taşındı
     container_name: mssql_db
     environment:
       - ACCEPT_EULA=Y
@@ -29,8 +30,7 @@ services:
     volumes:
       - sql_data:/var/opt/mssql
       - ./DBBackups:/var/opt/mssql/backups  # Backup dosyalarını mount ediyoruz
-      - ./restore-db.sh:/docker-entrypoint-initdb.d/restore-db.sh  # Restore scripti mount ediliyor
-    entrypoint: [ "/bin/bash", "-c", "/docker-entrypoint-initdb.d/restore-db.sh" ]
+    restart: always
 
   auth_api:
     build:
