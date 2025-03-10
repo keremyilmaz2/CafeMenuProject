@@ -73,7 +73,6 @@ networks:
 
 volumes:
   sql_data:
-  rabbitmq:
   seq_data:
   logs:
   
