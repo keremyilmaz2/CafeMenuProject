@@ -7,18 +7,30 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Formatting.Json;
+using Serilog.Sinks.Grafana.Loki;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Serilog yapılandırmasını güncelle (Servis ismini ekle)
+// 🌟 Serilog'u Loki & Promtail uyumlu hale getir
 builder.Host.UseSerilog((context, loggerConfig) =>
 {
     loggerConfig
         .ReadFrom.Configuration(context.Configuration)
-        .Enrich.WithProperty("Service", "AuthAPI") // Servis ismi ekleniyor
-        .Enrich.FromLogContext();
+        .Enrich.WithProperty("Service", "AuthAPI") // Servis ismini ekle
+        .Enrich.FromLogContext()
+        .WriteTo.Console(new JsonFormatter()) // 🌟 Promtail için JSON formatında log
+        .WriteTo.File(new JsonFormatter(), "/app/logs/auth-api.log", rollingInterval: RollingInterval.Day) // 📂 JSON formatında dosya logu
+        .WriteTo.Seq("http://seq_log_service:5341") // 🚀 SEQ log servisine gönder
+        .WriteTo.GrafanaLoki("http://loki:3100", labels: new List<LokiLabel>
+        {
+            new LokiLabel { Key = "app", Value = "auth-api" },
+            new LokiLabel { Key = "env", Value = "docker" }
+        }); // 📊 Loki'ye log gönder
 });
 
+
+// Ortam değişkenlerini yükle
 var environment = builder.Environment.EnvironmentName;
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -67,6 +79,7 @@ var app = builder.Build();
 
 // 📌 **Serilog Middleware'i En Üste Aldım** (Tüm istekleri loglayabilmesi için)
 app.UseMiddleware<LoggingMiddleware>();
+
 // Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
