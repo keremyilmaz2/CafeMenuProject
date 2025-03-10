@@ -72,6 +72,8 @@ networks:
   app-network:
 
 volumes:
+  sql_data:
+  rabbitmq:
   seq_data:
   logs:
   
