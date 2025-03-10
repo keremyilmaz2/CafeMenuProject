@@ -28,7 +28,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./logs:/app/logs  
+      - logs:/app/logs  
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_ENVIRONMENT=Docker
@@ -63,8 +63,9 @@ services:
     container_name: promtail
     volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - ./promtail-config.yml:/etc/promtail/promtail-config.yml
-    command: -config.file=/etc/promtail/promtail-config.yml
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - promtail_positions:/tmp
+    command: -config.file=/etc/promtail/config.yml
     depends_on:
       - loki
     networks:
@@ -108,4 +109,5 @@ volumes:
   seq_data:
   loki_data:
   grafana_data:
+  promtail_positions:
   logs:
