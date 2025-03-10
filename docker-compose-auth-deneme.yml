@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  
+  mssql_db:
+    build:
+      context: ./mssql  # Dockerfile ve restore-db.sh buraya taşındı
+    container_name: mssql_db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Keremkerem11!
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: always
+
+  auth_api:
+    build:
+      context: ./Calia
+      dockerfile: Calia.Services.AuthAPI/Dockerfile
+    container_name: auth_api
+    ports:
+      - "5001:8080"
+    depends_on:
+      - mssql_db
+      - rabbitmq
+    networks:
+      - app-network
+    volumes:
+      - ./logs:/app/logs  
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=AuthDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq
+
+  
+  seq_log_service:
+    image: datalust/seq:latest
+    container_name: seq_log_service
+    ports:
+      - "5341:5341"
+      - "8081:80"
+    environment:
+      - ACCEPT_EULA=Y  
+    networks:
+      - app-network
+    volumes:
+    - seq_data:/data  
+
+
+  calia_web:
+    build:
+      context: ./Calia
+      dockerfile: Calia.Web/Dockerfile
+    container_name: calia_web
+    ports:
+      - "5000:8080"
+    depends_on:
+      - auth_api
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - AUTH_API_URL=http://auth_api:8080
+      
+networks:
+  app-network:
+
+volumes:
+  seq_data:
+  logs:
+  
