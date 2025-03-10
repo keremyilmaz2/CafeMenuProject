@@ -35,8 +35,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_ENVIRONMENT=Docker
       - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=AuthDB;User Id=sa;Password=Keremkerem11!;
-      - RabbitMQ__Host=rabbitmq
-
   
   seq_log_service:
     image: datalust/seq:latest
