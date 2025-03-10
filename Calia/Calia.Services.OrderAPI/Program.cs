@@ -12,8 +12,29 @@ using Calia.Services.OrderAPI.Services;
 using Microsoft.AspNetCore.SignalR;
 using Calia.Services.OrderAPI.Hubs;
 using Stripe;
+using Serilog;
+using Calia.Services.OrderAPI.Middleware;
+using Serilog.Formatting.Json;
+using Serilog.Sinks.Grafana.Loki;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, loggerConfig) =>
+{
+    loggerConfig
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.WithProperty("Service", "OrderAPI") // Servis ismini ekle
+        .Enrich.FromLogContext()
+        .WriteTo.Console(new JsonFormatter()) // 🌟 Promtail için JSON formatında log
+        .WriteTo.File(new JsonFormatter(), "/app/logs/order-api.log", rollingInterval: RollingInterval.Day) // 📂 JSON formatında dosya logu
+        .WriteTo.Seq("http://seq_log_service:5341") // 🚀 SEQ log servisine gönder
+        .WriteTo.GrafanaLoki("http://loki:3100", labels: new List<LokiLabel>
+        {
+            new LokiLabel { Key = "app", Value = "order-api" },
+            new LokiLabel { Key = "env", Value = "docker" }
+        }); // 📊 Loki'ye log gönder
+});
+
 var environment = builder.Environment.EnvironmentName;
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -107,16 +128,18 @@ builder.Services.AddCors(options =>
 builder.Services.AddSignalR();
 
 var app = builder.Build();
+app.UseMiddleware<LoggingMiddleware>();
 
 //// HTTP request pipeline'ı yapılandırma
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI();
 //}
 
 Stripe.StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 app.UseHttpsRedirection();
+app.UseSerilogRequestLogging();
 
 app.UseRouting();
 //app.UseCors("AllowSpecificOrigin"); // CORS kullanımı

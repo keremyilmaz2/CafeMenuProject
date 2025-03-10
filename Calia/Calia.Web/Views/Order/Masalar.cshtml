@@ -42,7 +42,8 @@
         const shoppingCartApiBase = "@Context.Items["OrderAPI"]";
         const connection = new signalR.HubConnectionBuilder()
             .withUrl(`${shoppingCartApiBase}/hubs/TableHub`, {
-                withCredentials: true
+                withCredentials: true,
+                transport: signalR.HttpTransportType.LongPolling
             })
             .build();
 

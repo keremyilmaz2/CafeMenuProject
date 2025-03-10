@@ -1,25 +1,19 @@
 31
 ---------------------------------
 Odemesi Alinanlar: 
-Ikram Edilenler: 
+DOUBLE ESPRESSO X1 --- 90 
+ESPRESSO X1 --- 70 
+
+
 Iptal Edilenler: 
-Odemesi Alinanlar: 
-ICE KARI X0 --- 0 
-  * Extra Shot
-  * Extra Karamel
-Ikram Edilenler: 
-ICE KARI X0 --- 0 
-  * Extra Shot
-  * Extra Karamel
-Iptal Edilenler: 
-PUMPKIN SPICE LATTE X1 --- 110 
-Nakit =>140
 
-Kredi Karti =>5
+Nakit =>
 
-Iskonto =>90
+Kredi Karti =>160
 
-Ikram =>2
+Iskonto =>
+
+Ikram =>
 
 
 

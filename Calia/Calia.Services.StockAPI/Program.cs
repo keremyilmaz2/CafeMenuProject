@@ -2,13 +2,35 @@
 using Calia.Services.StockAPI;
 using Calia.Services.StockAPI.Data;
 using Calia.Services.StockAPI.Extensions;
+using Calia.Services.StockAPI.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Formatting.Json;
+using Serilog.Sinks.Grafana.Loki;
 using System;
 using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, loggerConfig) =>
+{
+    loggerConfig
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.WithProperty("Service", "StockAPI") // Servis ismini ekle
+        .Enrich.FromLogContext()
+        .WriteTo.Console(new JsonFormatter()) // 🌟 Promtail için JSON formatında log
+        .WriteTo.File(new JsonFormatter(), "/app/logs/stock-api.log", rollingInterval: RollingInterval.Day) // 📂 JSON formatında dosya logu
+        .WriteTo.Seq("http://seq_log_service:5341") // 🚀 SEQ log servisine gönder
+        .WriteTo.GrafanaLoki("http://loki:3100", labels: new List<LokiLabel>
+        {
+            new LokiLabel { Key = "app", Value = "stock-api" },
+            new LokiLabel { Key = "env", Value = "docker" }
+        }); // 📊 Loki'ye log gönder
+});
+
+
 var environment = builder.Environment.EnvironmentName;
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -82,12 +104,15 @@ builder.Services.AddHttpClient("StockAPI", client =>
 }).ConfigurePrimaryHttpMessageHandler(() => httpClientHandler); // HttpClient'a handler'ı ekle
 
 var app = builder.Build();
+app.UseMiddleware<LoggingMiddleware>();
 
 // Swagger kullanımı
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+app.UseSerilogRequestLogging();
+
 app.UseRouting();
 app.UseCors("AllowSpecificOrigin");
 app.UseAuthentication();

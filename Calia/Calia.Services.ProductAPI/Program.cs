@@ -9,8 +9,29 @@ using Calia.Services.ProductAPI.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Sinks.Grafana.Loki;
+using Serilog.Formatting.Json;
+using Calia.Services.ProductAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, loggerConfig) =>
+{
+    loggerConfig
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.WithProperty("Service", "ProductAPI") // Servis ismini ekle
+        .Enrich.FromLogContext()
+        .WriteTo.Console(new JsonFormatter()) // 🌟 Promtail için JSON formatında log
+        .WriteTo.File(new JsonFormatter(), "/app/logs/product-api.log", rollingInterval: RollingInterval.Day) // 📂 JSON formatında dosya logu
+        .WriteTo.Seq("http://seq_log_service:5341") // 🚀 SEQ log servisine gönder
+        .WriteTo.GrafanaLoki("http://loki:3100", labels: new List<LokiLabel>
+        {
+            new LokiLabel { Key = "app", Value = "product-api" },
+            new LokiLabel { Key = "env", Value = "docker" }
+        }); // 📊 Loki'ye log gönder
+});
+
 var environment = builder.Environment.EnvironmentName;
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -70,15 +91,17 @@ builder.Services.AddCors(options =>
     });
 });
 var app = builder.Build();
+app.UseMiddleware<LoggingMiddleware>();
 
 //// Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-	app.UseSwagger();
+app.UseSwagger();
 	app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
+app.UseSerilogRequestLogging();
 
 
 app.UseRouting();

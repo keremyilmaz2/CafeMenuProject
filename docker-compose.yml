@@ -46,7 +46,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./logs:/app/logs  
+      - logs:/app/logs  
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_ENVIRONMENT=Docker
@@ -65,6 +65,8 @@ services:
       - rabbitmq
     networks:
       - app-network
+    volumes:
+      - logs:/app/logs    
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_ENVIRONMENT=Docker
@@ -83,6 +85,8 @@ services:
       - rabbitmq
     networks:
       - app-network
+    volumes:
+      - logs:/app/logs    
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_ENVIRONMENT=Docker
@@ -101,6 +105,8 @@ services:
       - rabbitmq
     networks:
       - app-network
+    volumes:
+      - logs:/app/logs    
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_ENVIRONMENT=Docker
@@ -119,6 +125,8 @@ services:
       - rabbitmq
     networks:
       - app-network
+    volumes:
+      - logs:/app/logs    
     environment:
       - ASPNETCORE_ENVIRONMENT=Docker
       - DOTNET_ENVIRONMENT=Docker
@@ -132,6 +140,8 @@ services:
     container_name: stock_api
     ports:
       - "5006:8080"
+    volumes:
+      - logs:/app/logs    
     depends_on:
       - mssql_db
       - rabbitmq
@@ -142,6 +152,7 @@ services:
       - DOTNET_ENVIRONMENT=Docker
       - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=StockDB;User Id=sa;Password=Keremkerem11!;
       - RabbitMQ__Host=rabbitmq  
+  
   
   seq_log_service:
     image: datalust/seq:latest
@@ -154,7 +165,46 @@ services:
     networks:
       - app-network
     volumes:
-    - seq_data:/data  
+      - seq_data:/data  
+
+  loki:
+    image: grafana/loki:2.8.2
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki_data:/loki
+    networks:
+      - app-network
+
+  promtail:
+    image: grafana/promtail:2.8.2
+    container_name: promtail
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - promtail_positions:/tmp
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - loki
+    networks:
+      - app-network
+    volumes:
+      - grafana_data:/var/lib/grafana
+
 
 
   calia_web:
@@ -191,4 +241,7 @@ volumes:
   rabbitmq:
   seq_data:
   logs:
+  loki_data:
+  grafana_data:
+  promtail_positions:
   
