@@ -40,5 +40,6 @@ obj/
 */**/bin/
 */**/obj/
 
-
+logs/
+*/**/logs/
 

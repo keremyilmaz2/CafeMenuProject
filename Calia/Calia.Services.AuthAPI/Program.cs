@@ -1,4 +1,5 @@
 ﻿using Calia.Services.AuthAPI.Data;
+using Calia.Services.AuthAPI.Middleware;
 using Calia.Services.AuthAPI.Models;
 using Calia.Services.AuthAPI.Service;
 using Calia.Services.AuthAPI.Service.IService;
@@ -6,23 +7,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Serilog Konfigürasyonu
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .Enrich.FromLogContext()
-    .Enrich.WithThreadId()
-    .Enrich.WithEnvironmentName()
-    .WriteTo.Console()
-    .WriteTo.File("logs/auth-api-.log", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 7) // Eski logları temizler
-    .CreateLogger();
+// Serilog yapılandırmasını güncelle (Servis ismini ekle)
+builder.Host.UseSerilog((context, loggerConfig) =>
+{
+    loggerConfig
+        .ReadFrom.Configuration(context.Configuration)
+        .Enrich.WithProperty("Service", "AuthAPI") // Servis ismi ekleniyor
+        .Enrich.FromLogContext();
+});
 
-builder.Host.UseSerilog();
-
-// Ortam değişkenlerini yükle
 var environment = builder.Environment.EnvironmentName;
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -34,6 +30,7 @@ builder.Configuration
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")));
 
+// JWT ve Authentication Konfigürasyonu
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("ApiSettings:JwtOptions"));
 
 // Identity Servisi
@@ -54,7 +51,7 @@ builder.Services.AddSwaggerGen();
 // Yetkilendirme
 builder.Services.AddAuthorization();
 
-// CORS Politikası (Önerilen)
+// CORS Politikası
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", policy =>
@@ -68,15 +65,15 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Serilog Middleware
-app.UseSerilogRequestLogging();
-
+// 📌 **Serilog Middleware'i En Üste Aldım** (Tüm istekleri loglayabilmesi için)
+app.UseMiddleware<LoggingMiddleware>();
 // Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
 
 // HTTPS Zorunlu
 app.UseHttpsRedirection();
+app.UseSerilogRequestLogging();
 
 // CORS Kullanımı
 app.UseRouting();
@@ -101,14 +98,20 @@ void ApplyMigration()
 
     try
     {
+        // Veritabanı migrasyonlarını uygula
         if (_db.Database.GetPendingMigrations().Any())
         {
             _db.Database.Migrate();
-            Log.Information("Veritabanı migrasyonları başarıyla uygulandı.");
+            Log.Information("✅ Veritabanı migrasyonları başarıyla uygulandı.");
+        }
+        else
+        {
+            Log.Information("🔍 Uygulanacak veritabanı migrasyonu bulunamadı.");
         }
     }
     catch (Exception ex)
     {
-        Log.Error(ex, "Veritabanı migrasyonu sırasında hata oluştu.");
+        // Hata oluşursa logla
+        Log.Error(ex, "❌ Veritabanı migrasyonu sırasında hata oluştu.");
     }
 }
