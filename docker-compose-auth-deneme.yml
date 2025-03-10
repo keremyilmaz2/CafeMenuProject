@@ -26,7 +26,6 @@ services:
       - "5001:8080"
     depends_on:
       - mssql_db
-      - rabbitmq
     networks:
       - app-network
     volumes:
