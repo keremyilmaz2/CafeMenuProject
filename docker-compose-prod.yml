@@ -1,0 +1,233 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    hostname: "rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - app-network
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq/mnesia
+
+  mssql_db:
+    build:
+      context: ./mssql  # Dockerfile ve restore-db.sh buraya taşındı
+    container_name: mssql_db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Keremkerem11!
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+    volumes:
+      - sql_data:/var/opt/mssql
+      - ./DBBackups:/var/opt/mssql/backups
+      - ./mssql/restore-db.sh:/var/opt/mssql/restore-db.sh # Bunu ekledik  # Backup dosyalarını mount ediyoruz
+    restart: always
+
+  auth_api:
+    image: kerem1406/cafeauthapirepo:latest
+    container_name: auth_api
+    ports:
+      - "5001:8080"
+    depends_on:
+      - mssql_db
+      - rabbitmq
+    networks:
+      - app-network
+    volumes:
+      - logs:/app/logs  
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=AuthDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq
+
+  order_api:
+    image: kerem1406/cafeorderapirepo:latest
+    container_name: order_api
+    ports:
+      - "5002:8080"
+    depends_on:
+      - mssql_db
+      - rabbitmq
+    networks:
+      - app-network
+    volumes:
+      - logs:/app/logs    
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=OrderDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq
+
+  category_api:
+    image: kerem1406/cafecategoryapirepo:latest
+    container_name: category_api
+    ports:
+      - "5003:8080"
+    depends_on:
+      - mssql_db
+      - rabbitmq
+    networks:
+      - app-network
+    volumes:
+      - logs:/app/logs    
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=CategoryDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+
+  product_api:
+    image: kerem1406/cafeproductapirepo:latest
+    container_name: product_api
+    ports:
+      - "5004:8080"
+    depends_on:
+      - mssql_db
+      - rabbitmq
+    networks:
+      - app-network
+    volumes:
+      - logs:/app/logs    
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=ProductDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+
+  shoppingcart_api:
+    image: kerem1406/cafeshoppingcartapirepo:latest
+    container_name: shoppingcart_api
+    ports:
+      - "5005:8080"
+    depends_on:
+      - mssql_db
+      - rabbitmq
+    networks:
+      - app-network
+    volumes:
+      - logs:/app/logs    
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=ShoppingCartDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+
+  stock_api:
+    image: kerem1406/cafestockapirepo:latest
+    container_name: stock_api
+    ports:
+      - "5006:8080"
+    volumes:
+      - logs:/app/logs    
+    depends_on:
+      - mssql_db
+      - rabbitmq
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - ConnectionStrings__DefaultConnection=Server=mssql_db;Database=StockDB;User Id=sa;Password=Keremkerem11!;
+      - RabbitMQ__Host=rabbitmq  
+  
+  
+  seq_log_service:
+    image: datalust/seq:latest
+    container_name: seq_log_service
+    ports:
+      - "5341:5341"
+      - "8081:80"
+    environment:
+      - ACCEPT_EULA=Y  
+    networks:
+      - app-network
+    volumes:
+      - seq_data:/data  
+
+  loki:
+    image: grafana/loki:2.8.2
+    container_name: loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - loki_data:/loki
+    networks:
+      - app-network
+
+  promtail:
+    image: grafana/promtail:2.8.2
+    container_name: promtail
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./promtail-config.yml:/etc/promtail/config.yml
+      - promtail_positions:/tmp
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - loki
+    networks:
+      - app-network
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+
+
+  calia_web:
+    image: kerem1406/cafewebapirepo:latest
+    container_name: calia_web
+    ports:
+      - "5000:8080"
+    depends_on:
+      - auth_api
+      - order_api
+      - category_api
+      - product_api
+      - shoppingcart_api
+      - stock_api
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - DOTNET_ENVIRONMENT=Docker
+      - AUTH_API_URL=http://auth_api:8080
+      - ORDER_API_URL=http://order_api:8080
+      - PRODUCT_API_URL=http://product_api:8080
+      - CATEGORY_API_URL=http://category_api:8080
+      - SHOPPINGCART_API_URL=http://shoppingcart_api:8080
+      - STOCK_API_URL=http://stock_api:8080
+
+networks:
+  app-network:
+
+volumes:
+  sql_data:
+  rabbitmq:
+  seq_data:
+  logs:
+  loki_data:
+  grafana_data:
+  promtail_positions:
+  
