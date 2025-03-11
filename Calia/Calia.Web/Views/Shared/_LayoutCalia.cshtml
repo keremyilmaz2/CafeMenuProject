@@ -192,7 +192,8 @@
         const connection = new signalR.HubConnectionBuilder()
             .withUrl(`${shoppingCartApiBase}/hubs/CartHub`, {
                 withCredentials: true,
-                transport: signalR.HttpTransportType.LongPolling
+                transport: signalR.HttpTransportType.WebSockets,
+                skipNegotiation: true
             })
             .build();
 
