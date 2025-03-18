@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Run All Jobsss') {
+        stage('Run Alll Jobsss') {
             steps {
                 script {
                     // Paralel olarak çalışacak tüm işleri tanımlıyoruz.
